@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-bg: #F8F9FA;
+  --color-white-surface: #FCFDFE;
+  --color-primary-text: #0F1115;
+  --color-secondary-text: #525866;
+  --color-border: #E2E4E9;
+  --color-primary-accent: #1E3A8A;
+  --color-accent-hover: #172554;
+
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Bengali', sans-serif;
+  --font-display: 'Outfit', 'Noto Sans Bengali', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-primary-bg text-primary-text font-sans antialiased leading-relaxed;
+    font-size: 16px;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
