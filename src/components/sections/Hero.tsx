@@ -44,12 +44,12 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section id="home" className="relative min-h-[calc(100vh-80px)] flex items-center pt-10 pb-20 overflow-hidden bg-transparent">
+    <section id="home" className="relative min-h-[calc(100vh-80px)] flex items-center pt-20 md:pt-10 pb-20 overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
           
           {/* Text Content */}
-          <div className="flex flex-col items-start space-y-8 z-10">
+          <div className="flex flex-col items-start space-y-6 md:space-y-8 z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -63,7 +63,10 @@ export function Hero() {
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-text leading-[1.15] tracking-tight mb-6">
-                {t.hero.heading}
+                <span className="block">{t.hero.heading.split(' ')[0]}</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-accent to-blue-500">
+                  {t.hero.heading.substring(t.hero.heading.indexOf(' ') + 1)}
+                </span>
               </h1>
               
               <p className="text-lg sm:text-xl text-secondary-text leading-relaxed max-w-lg">
