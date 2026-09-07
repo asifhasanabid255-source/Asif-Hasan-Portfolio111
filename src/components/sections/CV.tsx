@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
 import { SectionHeading } from '../ui/SectionHeading';
 import { personalData } from '../../data/personal';
-import { FileText, Download, Eye } from 'lucide-react';
+import { FileText, Download, Eye, Loader2 } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { CVPdfTemplate } from '../cv/CVPdfTemplate';
+// @ts-ignore
+import html2pdf from 'html2pdf.js';
 
 export function CV() {
   const { language, t } = useLanguage();
-  
-  // Use the existing CV data structure, defaulting to empty strings if undefined
-  const cvData = personalData.cv || { en: '', bn: '' };
-  
-  // Determine if a CV is available for the currently selected language
-  const currentCVUrl = cvData[language];
-  const isAvailable = Boolean(currentCVUrl);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const cvRef = useRef<HTMLDivElement>(null);
+
+  const handleDownloadPdf = async () => {
+    if (!cvRef.current) return;
+    setIsGenerating(true);
+    
+    try {
+      const element = cvRef.current;
+      const opt = {
+        margin:       0,
+        filename:     `Asif_Hasan_CV_${language}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+      console.error("Failed to generate PDF", error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <section id="cv" className="py-24 bg-transparent overflow-hidden border-t border-border/40">
@@ -55,11 +75,11 @@ export function CV() {
           >
             {/* Subtle decorative background shape */}
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary-accent/5 rounded-full blur-3xl pointer-events-none"></div>
-
+            
             <div className="w-16 h-16 rounded-2xl bg-gray-50 border border-border flex items-center justify-center text-primary-accent mb-6 shadow-sm">
               <FileText size={32} strokeWidth={1.5} />
             </div>
-
+            
             <h3 className="text-2xl sm:text-3xl font-bold text-primary-text mb-3">
               {t.resume.card.title}
             </h3>
@@ -67,39 +87,24 @@ export function CV() {
             <p className="text-secondary-text font-medium text-sm sm:text-base mb-6">
               {t.resume.card.subtitle}
             </p>
-
-            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-gray-50 border border-border/70 text-xs font-semibold text-secondary-text tracking-wide mb-10">
-              {isAvailable ? 'CV Available' : t.resume.card.statusUnavailable}
+            
+            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70 text-xs font-semibold tracking-wide mb-10">
+              {language === 'en' ? 'CV Available for Download' : 'সিভি ডাউনলোডের জন্য প্রস্তুত'}
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
               <Button 
                 variant="primary" 
-                href={isAvailable ? currentCVUrl : undefined}
-                download={isAvailable ? true : undefined}
-                disabled={!isAvailable}
-                className={`w-full sm:w-auto flex items-center justify-center gap-2 ${!isAvailable ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={handleDownloadPdf}
+                disabled={isGenerating}
+                className="w-full sm:w-auto flex items-center justify-center gap-2"
                 aria-label={t.resume.actions.download}
               >
-                <Download size={18} />
-                {t.resume.actions.download}
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                href={isAvailable ? currentCVUrl : undefined}
-                target={isAvailable ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                disabled={!isAvailable}
-                className={`w-full sm:w-auto flex items-center justify-center gap-2 ${!isAvailable ? 'opacity-50 cursor-not-allowed text-secondary-text border-border' : ''}`}
-                aria-label={t.resume.actions.view}
-              >
-                <Eye size={18} />
-                {t.resume.actions.view}
+                {isGenerating ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
+                {isGenerating ? (language === 'en' ? 'Generating...' : 'তৈরি হচ্ছে...') : t.resume.actions.download}
               </Button>
             </div>
-            
           </motion.div>
         </div>
 
@@ -115,7 +120,11 @@ export function CV() {
             {t.resume.note}
           </p>
         </motion.div>
+      </div>
 
+      {/* Hidden CV template used for generating the PDF */}
+      <div className="absolute -left-[9999px] top-0 -z-50 opacity-0 pointer-events-none overflow-hidden h-0 w-0">
+        <CVPdfTemplate ref={cvRef} language={language} />
       </div>
     </section>
   );

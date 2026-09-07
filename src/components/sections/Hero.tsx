@@ -62,14 +62,14 @@ export function Hero() {
                 </span>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary-text leading-[1.15] tracking-tight mb-6">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-primary-text leading-[1.15] tracking-tight mb-6">
                 <span className="block">{t.hero.heading.split(' ')[0]}</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-accent to-blue-500">
                   {t.hero.heading.substring(t.hero.heading.indexOf(' ') + 1)}
                 </span>
               </h1>
               
-              <p className="text-lg sm:text-xl text-secondary-text leading-relaxed max-w-lg">
+              <p className="text-base sm:text-lg md:text-xl text-secondary-text leading-relaxed max-w-lg">
                 {t.hero.description}
               </p>
             </motion.div>
