@@ -18,7 +18,7 @@ export function Portfolio() {
     { id: 'Graphic Design', label: t.portfolio.filters.graphicDesign },
   ];
 
-  const filteredProjects = projectsData.filter(
+  const filteredProjects = [...projectsData].reverse().filter(
     project => activeFilter === 'All' || project.category === activeFilter
   );
 
