@@ -87,7 +87,7 @@ export const projectsData: Project[] = [
       en: 'A promotional poster design for a Steak House restaurant, created using Adobe Photoshop and Illustrator.',
       bn: 'অ্যাডোবি ফটোশপ এবং ইলাস্ট্রেটর ব্যবহার করে একটি স্টেক হাউস রেস্টুরেন্টের জন্য তৈরি প্রমোশনাল পোস্টার ডিজাইন।'
     },
-    thumbnail: '',
+    thumbnail: 'https://i.postimg.cc/sxw2pbGz/Beef-menu-08-09-26.jpg',
     platform: 'Behance',
     projectUrl: 'https://www.behance.net/gallery/255395839/Steak-House-Restaurant-Promotional-Poster-Design'
   }
