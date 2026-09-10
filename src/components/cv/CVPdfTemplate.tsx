@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { personalData } from '../../data/personal';
+import { Mail, Phone, MapPin, Globe, Linkedin, Youtube, Facebook, Github } from 'lucide-react';
 
 interface CVPdfTemplateProps {
   language: 'en' | 'bn';
@@ -9,114 +10,147 @@ export const CVPdfTemplate = forwardRef<HTMLDivElement, CVPdfTemplateProps>(({ l
   return (
     <div 
       ref={ref} 
-      className="bg-white text-gray-900 w-[210mm] min-h-[297mm] p-10 box-border mx-auto font-sans"
+      className="bg-white text-gray-900 w-[210mm] min-h-[297mm] box-border mx-auto font-sans flex shadow-lg"
       style={{
         width: '210mm',
         minHeight: '297mm',
-        padding: '40px',
         backgroundColor: '#ffffff',
-        color: '#1a202c',
         fontFamily: 'system-ui, -apple-system, sans-serif'
       }}
     >
-      {/* Header */}
-      <div className="flex items-center border-b-2 border-gray-200 pb-6 mb-6">
-        <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-primary-accent shrink-0">
+      {/* Left Column - Colored (Blue) */}
+      <div 
+        className="w-1/3 p-8 flex flex-col"
+        style={{ backgroundColor: '#1E3A8A', color: '#ffffff' }}
+      >
+        {/* Profile Image */}
+        <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white/20 mb-8 shrink-0 flex items-center justify-center bg-white/10">
           <img 
-            src="https://i.postimg.cc/cJ2CkzjV/abid.png" // Updated image
+            src="https://i.postimg.cc/cJ2CkzjV/abid.png"
             alt={personalData.name[language]} 
             className="w-full h-full object-cover"
-            crossOrigin="anonymous" // required for html2pdf rendering remote images
+            crossOrigin="anonymous"
           />
         </div>
-        <div className="ml-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2 uppercase">{personalData.name[language]}</h1>
-          <h2 className="text-xl text-primary-accent font-medium mb-4">{personalData.professionalTitle[language]}</h2>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
-            <p><strong>Email:</strong> {personalData.email}</p>
-            <p><strong>Phone:</strong> {personalData.whatsapp}</p>
-            <p><strong>Location:</strong> {personalData.location[language]}</p>
-          </div>
-        </div>
-      </div>
 
-      {/* About */}
-      <div className="mb-6">
-        <h3 className="text-lg font-bold text-gray-900 border-b border-gray-200 pb-2 mb-3 uppercase tracking-wider">
-          {language === 'en' ? 'About Me' : 'আমার সম্পর্কে'}
-        </h3>
-        <p className="text-sm text-gray-700 leading-relaxed">
-          {personalData.aboutText[language]}
-        </p>
-      </div>
-
-      {/* Experience & Skills Split */}
-      <div className="flex gap-8 mb-6">
-        {/* Left Column */}
-        <div className="flex-1">
-          <h3 className="text-lg font-bold text-gray-900 border-b border-gray-200 pb-2 mb-3 uppercase tracking-wider">
-            {language === 'en' ? 'Experience' : 'অভিজ্ঞতা'}
+        {/* Contact Info */}
+        <div className="mb-10">
+          <h3 className="text-sm font-bold uppercase tracking-widest border-b border-white/30 pb-2 mb-4 text-blue-100">
+            {language === 'en' ? 'Contact' : 'যোগাযোগ'}
           </h3>
-          <div className="space-y-4">
-            {personalData.experience.map((exp) => (
-              <div key={exp.id}>
-                <h4 className="font-bold text-gray-900 text-sm">{exp.role[language]}</h4>
-                <div className="text-sm text-gray-600 mb-1 flex justify-between">
-                  <span>{exp.company[language]}</span>
-                  <span>{exp.duration[language]}</span>
-                </div>
-                <p className="text-xs text-gray-700">{exp.description[language]}</p>
+          <div className="space-y-4 text-sm text-blue-50">
+            <div className="flex items-center gap-3">
+              <Phone size={16} className="shrink-0 text-blue-300" />
+              <span className="break-all">{personalData.whatsapp}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Mail size={16} className="shrink-0 text-blue-300" />
+              <span className="break-all">{personalData.email}</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <MapPin size={16} className="shrink-0 mt-0.5 text-blue-300" />
+              <span>{personalData.location[language]}</span>
+            </div>
+            {personalData.facebook && (
+              <div className="flex items-center gap-3">
+                <Facebook size={16} className="shrink-0 text-blue-300" />
+                <span className="break-all">{personalData.facebook.replace('https://', '')}</span>
               </div>
-            ))}
-          </div>
-
-          <h3 className="text-lg font-bold text-gray-900 border-b border-gray-200 pb-2 mb-3 uppercase tracking-wider mt-6">
-            {language === 'en' ? 'Education' : 'শিক্ষাগত যোগ্যতা'}
-          </h3>
-          <div className="space-y-4">
-            {personalData.education.map((edu) => (
-              <div key={edu.id}>
-                <h4 className="font-bold text-gray-900 text-sm">{edu.degree[language]}</h4>
-                {edu.institution && <p className="text-sm text-gray-600">{edu.institution[language]}</p>}
-                {edu.result && <p className="text-xs text-gray-700 mt-1">{edu.result[language]}</p>}
-                {edu.description && <p className="text-xs text-gray-700 mt-1">{edu.description[language]}</p>}
+            )}
+            {personalData.behance && (
+              <div className="flex items-center gap-3">
+                <Globe size={16} className="shrink-0 text-blue-300" />
+                <span className="break-all">{personalData.behance.replace('https://', '')}</span>
               </div>
-            ))}
+            )}
+             {personalData.youtube && (
+              <div className="flex items-center gap-3">
+                <Youtube size={16} className="shrink-0 text-blue-300" />
+                <span className="break-all">{personalData.youtube.replace('https://', '')}</span>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Right Column */}
-        <div className="flex-1">
-          <h3 className="text-lg font-bold text-gray-900 border-b border-gray-200 pb-2 mb-3 uppercase tracking-wider">
+        {/* Training & Courses */}
+        <div className="mb-10">
+          <h3 className="text-sm font-bold uppercase tracking-widest border-b border-white/30 pb-2 mb-4 text-blue-100">
             {language === 'en' ? 'Training & Courses' : 'প্রশিক্ষণ ও কোর্স'}
           </h3>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {personalData.training.map((train) => (
               <div key={train.id}>
-                <h4 className="font-bold text-gray-900 text-sm">{train.title[language]}</h4>
-                <p className="text-sm text-gray-600">{train.institution[language]}</p>
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {train.tools?.map((tool, idx) => (
-                    <span key={idx} className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
-                      {tool}
-                    </span>
-                  ))}
-                </div>
+                <h4 className="font-bold text-sm text-white">{train.title[language]}</h4>
+                <p className="text-xs text-blue-200 mt-1">{train.institution[language]}</p>
               </div>
             ))}
           </div>
-          
-          <h3 className="text-lg font-bold text-gray-900 border-b border-gray-200 pb-2 mb-3 uppercase tracking-wider mt-6">
-            {language === 'en' ? 'Social Profiles' : 'সোশ্যাল প্রোফাইল'}
-          </h3>
-          <div className="space-y-1 text-sm text-gray-700">
-            {personalData.youtube && <p><strong>YouTube:</strong> {personalData.youtube}</p>}
-            {personalData.behance && <p><strong>Behance:</strong> {personalData.behance}</p>}
-            {personalData.facebook && <p><strong>Facebook:</strong> {personalData.facebook}</p>}
-          </div>
         </div>
+
       </div>
 
+      {/* Right Column - White */}
+      <div className="w-2/3 p-10 flex flex-col bg-white">
+        
+        {/* Name and Title */}
+        <div className="mb-10 pt-4">
+          <h1 className="text-4xl font-black text-gray-900 mb-2 tracking-tight uppercase" style={{ color: '#1E3A8A' }}>
+            {personalData.name[language]}
+          </h1>
+          <h2 className="text-xl text-gray-600 font-medium tracking-wide uppercase">
+            {personalData.professionalTitle[language]}
+          </h2>
+        </div>
+
+        {/* Profile */}
+        <div className="mb-8">
+          <h3 className="text-lg font-bold text-gray-900 border-b-2 border-gray-100 pb-2 mb-4 uppercase tracking-wider" style={{ color: '#1E3A8A' }}>
+            {language === 'en' ? 'Profile' : 'আমার সম্পর্কে'}
+          </h3>
+          <p className="text-sm text-gray-700 leading-relaxed text-justify">
+            {personalData.aboutText[language]}
+          </p>
+        </div>
+
+        {/* Experience */}
+        <div className="mb-8">
+          <h3 className="text-lg font-bold text-gray-900 border-b-2 border-gray-100 pb-2 mb-4 uppercase tracking-wider" style={{ color: '#1E3A8A' }}>
+            {language === 'en' ? 'Experience' : 'অভিজ্ঞতা'}
+          </h3>
+          <div className="space-y-6">
+            {personalData.experience.map((exp) => (
+              <div key={exp.id} className="relative pl-4 border-l-2 border-blue-100">
+                <div className="absolute w-2 h-2 bg-blue-800 rounded-full -left-[5px] top-1.5" style={{ backgroundColor: '#1E3A8A' }}></div>
+                <h4 className="font-bold text-gray-900 text-base">{exp.role[language]}</h4>
+                <div className="text-sm text-blue-800 font-medium mb-2 flex justify-between" style={{ color: '#1E3A8A' }}>
+                  <span>{exp.company[language]}</span>
+                  <span className="text-gray-500 italic text-xs">{exp.duration[language]}</span>
+                </div>
+                <p className="text-sm text-gray-700 leading-relaxed text-justify">{exp.description[language]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Education */}
+        <div className="mb-8">
+          <h3 className="text-lg font-bold text-gray-900 border-b-2 border-gray-100 pb-2 mb-4 uppercase tracking-wider" style={{ color: '#1E3A8A' }}>
+            {language === 'en' ? 'Education' : 'শিক্ষাগত যোগ্যতা'}
+          </h3>
+          <div className="space-y-5">
+            {personalData.education.map((edu) => (
+              <div key={edu.id} className="relative pl-4 border-l-2 border-blue-100">
+                <div className="absolute w-2 h-2 bg-blue-800 rounded-full -left-[5px] top-1.5" style={{ backgroundColor: '#1E3A8A' }}></div>
+                <h4 className="font-bold text-gray-900 text-base">{edu.degree[language]}</h4>
+                {edu.institution && <p className="text-sm text-blue-800 font-medium mt-1" style={{ color: '#1E3A8A' }}>{edu.institution[language]}</p>}
+                {edu.result && <p className="text-sm text-gray-600 mt-1">{edu.result[language]}</p>}
+                {edu.description && <p className="text-sm text-gray-700 mt-2 text-justify">{edu.description[language]}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 });

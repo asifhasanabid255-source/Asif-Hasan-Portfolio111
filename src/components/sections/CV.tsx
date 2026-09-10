@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
 import { SectionHeading } from '../ui/SectionHeading';
-import { personalData } from '../../data/personal';
-import { FileText, Download, Eye, Loader2 } from 'lucide-react';
+import { FileText, Download, Eye, Loader2, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { CVPdfTemplate } from '../cv/CVPdfTemplate';
 // @ts-ignore
@@ -12,6 +11,7 @@ import html2pdf from 'html2pdf.js';
 export function CV() {
   const { language, t } = useLanguage();
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const cvRef = useRef<HTMLDivElement>(null);
 
   const handleDownloadPdf = async () => {
@@ -89,11 +89,20 @@ export function CV() {
             </p>
             
             <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/70 text-xs font-semibold tracking-wide mb-10">
-              {language === 'en' ? 'CV Available for Download' : 'সিভি ডাউনলোডের জন্য প্রস্তুত'}
+              {language === 'en' ? 'Professional CV Available' : 'প্রফেশনাল সিভি প্রস্তুত'}
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+              <Button 
+                variant="outline" 
+                onClick={() => setIsModalOpen(true)}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 border-primary-accent text-primary-accent hover:bg-primary-accent/5"
+              >
+                <Eye size={18} />
+                {language === 'en' ? 'View Full CV' : 'ফুল সিভি দেখুন'}
+              </Button>
+
               <Button 
                 variant="primary" 
                 onClick={handleDownloadPdf}
@@ -126,6 +135,56 @@ export function CV() {
       <div className="absolute -left-[9999px] top-0 -z-50 opacity-0 pointer-events-none overflow-hidden h-0 w-0">
         <CVPdfTemplate ref={cvRef} language={language} />
       </div>
+
+      {/* CV Modal for Viewing */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-5xl max-h-[90vh] bg-gray-100 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-border shadow-sm z-10">
+                <h3 className="text-lg font-bold text-primary-text">
+                  {language === 'en' ? 'Curriculum Vitae' : 'জীবনবৃত্তান্ত'}
+                </h3>
+                <div className="flex items-center gap-3">
+                  <Button 
+                    variant="primary" 
+                    size="sm"
+                    onClick={handleDownloadPdf}
+                    disabled={isGenerating}
+                    className="flex items-center gap-2"
+                  >
+                    {isGenerating ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
+                    {language === 'en' ? 'Download' : 'ডাউনলোড'}
+                  </Button>
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                    aria-label="Close modal"
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Modal Body - CV Preview */}
+              <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-gray-200/50 flex justify-center">
+                <div className="transform scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 origin-top bg-white shadow-xl">
+                  {/* We reuse the template but without ref to avoid interfering with PDF generation */}
+                  <CVPdfTemplate language={language} />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }

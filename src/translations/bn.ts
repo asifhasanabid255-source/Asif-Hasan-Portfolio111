@@ -4,7 +4,7 @@ export default {
     home: 'হোম',
     about: 'আমার সম্পর্কে',
     skills: 'দক্ষতা',
-    portfolio: 'পোর্টফোলিও',
+    portfolio: 'মাই প্রজেক্ট',
     services: 'সেবাসমূহ',
     experience: 'অভিজ্ঞতা',
     education: 'শিক্ষা',
