@@ -5,8 +5,6 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { FileText, Download, Eye, Loader2, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { CVPdfTemplate } from '../cv/CVPdfTemplate';
-// @ts-ignore
-import html2pdf from 'html2pdf.js';
 
 export function CV() {
   const { language, t } = useLanguage();
@@ -24,13 +22,18 @@ export function CV() {
         margin:       0,
         filename:     `Asif_Hasan_CV_${language}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
+      // @ts-ignore
+      const html2pdfModule = await import('html2pdf.js');
+      const html2pdf = html2pdfModule.default ? html2pdfModule.default : html2pdfModule;
+
       await html2pdf().set(opt).from(element).save();
     } catch (error) {
-      console.error("Failed to generate PDF", error);
+      console.error("Failed to generate PDF:", error);
+      alert(language === 'en' ? "Failed to generate PDF. Please try again." : "পিডিএফ তৈরি করতে ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
     } finally {
       setIsGenerating(false);
     }
