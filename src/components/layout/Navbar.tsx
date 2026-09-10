@@ -72,7 +72,7 @@ export function Navbar() {
                 onClick={(e) => handleNavClick(e, '#home')}
                 className="flex items-center gap-3 font-bold text-xl md:text-2xl tracking-tight text-primary-text hover:text-primary-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-accent rounded-sm"
               >
-                <img src="https://i.ibb.co.com/Qgrg2Vg/logo.png" alt="Logo" className="h-10 md:h-12 w-auto object-contain" />
+                <img src="https://i.postimg.cc/K8wcFq91/Asif-Hasan-png-2K-20260910173948.jpg" alt="Logo" className="h-10 w-10 md:h-12 md:w-12 object-cover rounded-full" />
                 {personalData.name.en}
               </a>
             </div>
