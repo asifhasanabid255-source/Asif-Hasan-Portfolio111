@@ -90,5 +90,20 @@ export const projectsData: Project[] = [
     thumbnail: 'https://i.postimg.cc/sxw2pbGz/Beef-menu-08-09-26.jpg',
     platform: 'Behance',
     projectUrl: 'https://www.behance.net/gallery/255395839/Steak-House-Restaurant-Promotional-Poster-Design'
+  },
+  {
+    id: 'proj-7',
+    title: {
+      en: 'Nazmul Sir (YouTube Shorts)',
+      bn: 'নাজমুল স্যার (ইউটিউব শর্টস)'
+    },
+    category: 'Video Editing',
+    description: {
+      en: 'A fast-paced, high-energy YouTube Short showcasing modern dynamic editing, engaging cuts, and visual storytelling.',
+      bn: 'একটি চমৎকার ও আকর্ষক ইউটিউব শর্ট ভিডিও, যেখানে আধুনিক ডায়নামিক এডিটিং, দ্রুতগতির কাটস এবং ভিজ্যুয়াল স্টোরিটেলিং ফুটিয়ে তোলা হয়েছে।'
+    },
+    thumbnail: 'https://img.youtube.com/vi/8AgmX8Mkhx0/maxresdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtube.com/shorts/8AgmX8Mkhx0'
   }
 ];

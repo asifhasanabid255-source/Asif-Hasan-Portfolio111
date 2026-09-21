@@ -148,10 +148,10 @@ export function CV() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-gray-100 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+              className="relative w-full max-w-5xl max-h-[90vh] bg-primary-bg rounded-2xl shadow-2xl flex flex-col overflow-hidden"
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-border shadow-sm z-10">
+              <div className="flex items-center justify-between px-6 py-4 bg-white-surface border-b border-border shadow-sm z-10">
                 <h3 className="text-lg font-bold text-primary-text">
                   {language === 'en' ? 'Curriculum Vitae' : 'জীবনবৃত্তান্ত'}
                 </h3>
@@ -168,7 +168,7 @@ export function CV() {
                   </Button>
                   <button
                     onClick={() => setIsModalOpen(false)}
-                    className="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                    className="p-2 text-secondary-text hover:text-primary-text hover:bg-border/50 rounded-full transition-colors"
                     aria-label="Close modal"
                   >
                     <X size={24} />
@@ -177,8 +177,8 @@ export function CV() {
               </div>
 
               {/* Modal Body - CV Preview */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-gray-200/50 flex justify-center">
-                <div className="transform scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 origin-top bg-white shadow-xl">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-black/5 flex justify-center">
+                <div className="transform scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 origin-top shadow-xl">
                   {/* We reuse the template but without ref to avoid interfering with PDF generation */}
                   <CVPdfTemplate language={language} />
                 </div>

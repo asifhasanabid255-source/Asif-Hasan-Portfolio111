@@ -1,24 +1,45 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-bg: #F8F9FA;
-  --color-white-surface: #FCFDFE;
-  --color-primary-text: #0F1115;
-  --color-secondary-text: #525866;
-  --color-border: #E2E4E9;
-  --color-primary-accent: #1E3A8A;
-  --color-accent-hover: #172554;
-
+  --color-primary-bg: var(--bg-primary);
+  --color-white-surface: var(--bg-surface);
+  --color-primary-text: var(--text-primary);
+  --color-secondary-text: var(--text-secondary);
+  --color-border: var(--border-color);
+  --color-primary-accent: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
   --font-sans: 'Plus Jakarta Sans', 'Noto Sans Bengali', sans-serif;
   --font-display: 'Outfit', 'Noto Sans Bengali', sans-serif;
 }
 
 @layer base {
+  :root {
+    --bg-primary: #F8F9FA;
+    --bg-surface: #FCFDFE;
+    --text-primary: #0F1115;
+    --text-secondary: #525866;
+    --border-color: #E2E4E9;
+    --accent-primary: #1E3A8A;
+    --accent-hover: #172554;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-surface: #141414;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a3a3a3;
+      --border-color: #262626;
+      --accent-primary: #3B82F6;
+      --accent-hover: #60A5FA;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-primary-bg text-primary-text font-sans antialiased leading-relaxed;
+    @apply bg-primary-bg text-primary-text font-sans antialiased leading-relaxed transition-colors duration-300;
     font-size: 16px;
   }
   

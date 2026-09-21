@@ -5,38 +5,13 @@ import { Button } from '../ui/Button';
 
 const ProfileVisual = () => (
   <div className="relative w-full aspect-square max-w-md mx-auto lg:ml-auto">
-    <div className="absolute inset-0 bg-white-surface/90 backdrop-blur-sm rounded-[2.5rem] shadow-[0_20px_50px_-20px_rgba(30,58,138,0.2)] overflow-hidden flex items-center justify-center p-2 border border-border/60">
-      {/* 
-        This is where your image will be displayed.
-        To use your own photo:
-        1. Upload your photo (e.g., 'my-photo.jpg') to the 'public' folder using the file explorer on the left.
-        2. Change the src below from '/profile.svg' to '/my-photo.jpg'.
-      */}
+    <div className="absolute inset-0 bg-white-surface/40 backdrop-blur-md rounded-[2.5rem] shadow-[0_20px_50px_-20px_rgba(30,58,138,0.3)] overflow-hidden flex items-center justify-center p-2 border-[1px] border-white/60 ring-1 ring-white/20">
       <img 
-        src="https://i.postimg.cc/cJ2CkzjV/abid.png" 
+        src="/hero.png" 
         alt="Profile" 
         className="w-full h-full object-cover rounded-[2rem] bg-gray-100"
       />
     </div>
-    
-    {/* Floating elements to add depth */}
-    <motion.div 
-      animate={{ y: [0, -10, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute -top-6 -right-6 w-20 h-20 sm:w-24 sm:h-24 bg-white-surface/90 backdrop-blur-md border border-border/60 rounded-2xl shadow-md flex items-center justify-center z-10"
-    >
-      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-border/40 border-t-primary-accent animate-spin" style={{ animationDuration: '3s' }}></div>
-    </motion.div>
-    
-    <motion.div 
-      animate={{ y: [0, 10, 0] }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      className="absolute -bottom-4 -left-4 w-14 h-14 sm:w-16 sm:h-16 bg-primary-accent rounded-2xl shadow-lg flex items-center justify-center text-white z-10"
-    >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
-    </motion.div>
   </div>
 );
 

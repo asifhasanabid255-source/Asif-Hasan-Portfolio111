@@ -95,6 +95,7 @@ export function Portfolio() {
                       alt={project.title[language]} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
+                      referrerPolicy="no-referrer"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 bg-gray-50">

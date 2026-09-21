@@ -26,10 +26,9 @@ export const CVPdfTemplate = forwardRef<HTMLDivElement, CVPdfTemplateProps>(({ l
         {/* Profile Image */}
         <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white/20 mb-8 shrink-0 flex items-center justify-center bg-white/10">
           <img 
-            src="https://i.postimg.cc/cJ2CkzjV/abid.png"
+            src="/hero.png"
             alt={personalData.name[language]} 
             className="w-full h-full object-cover"
-            crossOrigin="anonymous"
           />
         </div>
 

@@ -14,7 +14,7 @@ export const personalData: PersonalData = {
     en: 'I’m Asif Hasan, a creative professional focused on video editing, motion graphics and graphic design. I enjoy turning ideas and information into clear, engaging and visually appealing content. I’m continuously improving my creative and technical skills to produce professional work for businesses, organizations and digital platforms.',
     bn: 'আমি আসিফ হাসান। ভিডিও এডিটিং, মোশন গ্রাফিক্স ও গ্রাফিক ডিজাইনে আগ্রহী একজন ক্রিয়েটিভ প্রফেশনাল। বিভিন্ন ধারণা ও তথ্যকে পরিষ্কার, আকর্ষণীয় এবং দৃষ্টিনন্দন ভিজ্যুয়াল কনটেন্টে রূপ দিতে আমি কাজ করি। ব্যবসা, প্রতিষ্ঠান ও ডিজিটাল প্ল্যাটফর্মের জন্য আরও প্রফেশনাল কাজ করার লক্ষ্যে আমি নিয়মিত আমার সৃজনশীল ও টেকনিক্যাল দক্ষতা উন্নত করছি।',
   },
-  email: 'asifhasanabid255@gmail.com', // Extracted from metadata
+  email: 'asifhasan.creative@gmail.com',
   whatsapp: '+8801305645150',
   linkedin: '[Add later]',
   youtube: 'https://www.youtube.com/channel/UCZsLHtMPe6H0gIyhfwvIdRQ',
