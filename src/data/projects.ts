@@ -105,5 +105,20 @@ export const projectsData: Project[] = [
     thumbnail: 'https://img.youtube.com/vi/8AgmX8Mkhx0/maxresdefault.jpg',
     platform: 'YouTube',
     projectUrl: 'https://youtube.com/shorts/8AgmX8Mkhx0'
+  },
+  {
+    id: 'proj-8',
+    title: {
+      en: 'Animation & Camera',
+      bn: 'অ্যানিমেশন ও ক্যামেরা'
+    },
+    category: 'Motion Graphics',
+    description: {
+      en: '3D camera movement and keyframe animation project demonstrating dynamic spatial pacing and motion control.',
+      bn: 'থ্রিডি ক্যামেরা মুভমেন্ট এবং কি-ফ্রেম অ্যানিমেশন প্রজেক্ট, যেখানে আকর্ষণীয় ভিজ্যুয়াল মোশন ও ক্যামেরা অ্যাঙ্গেল ফুটিয়ে তোলা হয়েছে।'
+    },
+    thumbnail: 'https://img.youtube.com/vi/qBSJ-SGVw_c/maxresdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtu.be/qBSJ-SGVw_c'
   }
 ];

@@ -28,7 +28,7 @@ export function CV() {
 
       // @ts-ignore
       const html2pdfModule = await import('html2pdf.js');
-      const html2pdf = html2pdfModule.default ? html2pdfModule.default : html2pdfModule;
+      const html2pdf = (html2pdfModule.default || html2pdfModule) as any;
 
       await html2pdf().set(opt).from(element).save();
     } catch (error) {

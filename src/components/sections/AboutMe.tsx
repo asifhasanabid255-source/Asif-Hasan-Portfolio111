@@ -84,7 +84,7 @@ export function AboutMe() {
 
             {/* CV Button */}
             <div>
-              <a href={cvData[language]} target="_blank" rel="noopener noreferrer" className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-4 rounded-full">
+              <a href="#cv" className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-primary-accent focus-visible:ring-offset-4 rounded-full">
                 <Button icon={<Download size={18} />} tabIndex={-1}>
                   {t.action.downloadCV}
                 </Button>

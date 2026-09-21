@@ -41,15 +41,24 @@ export const personalData: PersonalData = {
       },
       year: '2026',
       result: {
-        en: 'Passed with Zayyid Zidan',
-        bn: 'জায়্যিদ জিদ্দান বিভাগে উত্তীর্ণ'
+        en: 'Completed',
+        bn: 'সম্পন্ন'
       }
     },
     {
       id: 'edu-2',
       degree: {
-        en: 'Hafiz-e-Quran',
+        en: 'Hafez-e-Quran',
         bn: 'হাফেজ-এ-কুরআন'
+      },
+      institution: {
+        en: 'Completed',
+        bn: 'সম্পন্ন'
+      },
+      year: '2018',
+      result: {
+        en: 'Completed',
+        bn: 'সম্পন্ন'
       },
       description: {
         en: 'Completed memorization of the Holy Quran.',
