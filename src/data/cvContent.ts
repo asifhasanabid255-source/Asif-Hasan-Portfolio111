@@ -139,5 +139,46 @@ export const cvContent = {
         ]
       }
     }
-  }
+  },
+  contactInfo: {
+    email: 'asifhasan.creative@gmail.com',
+    phone: '01305645150',
+    portfolio: 'asifhasan.ai.studio',
+    address: {
+      en: 'Holding No: 99, Kajibari, Satarkul, Badda, Dhaka, Bangladesh',
+      bn: 'হোল্ডিং নং: ৯৯, কাজিবাড়ি, সাঁতারকুল, বাড্ডা, ঢাকা, বাংলাদেশ'
+    }
+  },
+  references: [
+    {
+      name: {
+        en: 'Borkotullah',
+        bn: 'বরকতুল্লাহ'
+      },
+      title: {
+        en: 'Graphic Design Instructor',
+        bn: 'গ্রাফিক ডিজাইন ইন্সট্রাক্টর'
+      },
+      organization: {
+        en: 'Senior Facilitator, As-Sunnah Skill Development Institute',
+        bn: 'সিনিয়র ফ্যাসিলিটেটর, আস-সুন্নাহ স্কিল ডেভেলপমেন্ট ইনস্টিটিউট'
+      },
+      mobile: '+880 1604-943535'
+    },
+    {
+      name: {
+        en: 'Mohammad Jabed Omar Jisan',
+        bn: 'মোহাম্মদ জাবেদ ওমর জিসান'
+      },
+      title: {
+        en: 'Video Editing Instructor',
+        bn: 'ভিডিও এডিটিং ইন্সট্রাক্টর'
+      },
+      organization: {
+        en: 'Senior Facilitator, As-Sunnah Skill Development Institute',
+        bn: 'সিনিয়র ফ্যাসিলিটেটর, আস-সুন্নাহ স্কিল ডেভেলপমেন্ট ইনস্টিটিউট'
+      },
+      mobile: '+880 1991-776651'
+    }
+  ]
 };

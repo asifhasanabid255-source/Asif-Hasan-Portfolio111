@@ -21,8 +21,8 @@ export const personalData: PersonalData = {
   behance: 'https://www.behance.net/asifhasan78',
   facebook: 'https://www.facebook.com/profile.php?id=61592503171372',
   location: {
-    en: 'Singair, Manikganj, Dhaka, Bangladesh',
-    bn: 'সিঙ্গাইর, মানিকগঞ্জ, ঢাকা, বাংলাদেশ',
+    en: 'Holding No: 99, Kajibari, Satarkul, Badda, Dhaka, Bangladesh',
+    bn: 'হোল্ডিং নং: ৯৯, কাজিবাড়ি, সাঁতারকুল, বাড্ডা, ঢাকা, বাংলাদেশ',
   },
   availability: {
     en: 'Available for New Projects',
