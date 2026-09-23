@@ -194,7 +194,7 @@ export function Contact() {
                         type="text" 
                         id="name" 
                         required 
-                        className="w-full px-3 py-2 bg-gray-50 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all"
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800/80 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all placeholder:text-secondary-text/60"
                         placeholder="Your Name"
                       />
                     </div>
@@ -205,7 +205,7 @@ export function Contact() {
                         type="email" 
                         id="email" 
                         required 
-                        className="w-full px-3 py-2 bg-gray-50 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all"
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800/80 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all placeholder:text-secondary-text/60"
                         placeholder="hello@example.com"
                       />
                     </div>
@@ -217,7 +217,7 @@ export function Contact() {
                       type="text" 
                       id="subject" 
                       required 
-                      className="w-full px-3 py-2 bg-gray-50 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all"
+                      className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800/80 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all placeholder:text-secondary-text/60"
                       placeholder="Project Inquiry"
                     />
                   </div>
@@ -228,7 +228,7 @@ export function Contact() {
                       id="message" 
                       required 
                       rows={3}
-                      className="w-full px-3 py-2 bg-gray-50 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all resize-none"
+                      className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800/80 border border-border rounded-lg text-primary-text text-xs focus:outline-none focus:ring-1 focus:ring-primary-accent focus:border-primary-accent transition-all resize-none placeholder:text-secondary-text/60"
                       placeholder="Tell me about your project..."
                     ></textarea>
                   </div>

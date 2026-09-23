@@ -2,9 +2,9 @@ export default {
   // Navigation
   nav: {
     home: 'হোম',
-    about: 'আমার সম্পর্কে',
+    about: 'আমার পরিচয়',
     skills: 'দক্ষতা',
-    portfolio: 'মাই প্রজেক্ট',
+    portfolio: 'কাজসমূহ',
     services: 'সেবাসমূহ',
     experience: 'অভিজ্ঞতা',
     education: 'শিক্ষা',

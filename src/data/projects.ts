@@ -2,82 +2,112 @@ import { Project } from '../types';
 
 export const projectsData: Project[] = [
   {
-    id: 'proj-1',
+    id: 'proj-nazmul-sir-short',
     title: {
-      en: 'Dynamic Video Editing (YouTube Shorts)',
-      bn: 'ডায়নামিক ভিডিও এডিটিং (ইউটিউব শর্টস)'
+      en: 'Nazmul Sir (Dynamic Video Short)',
+      bn: 'নাজমুল স্যার (ডায়নামিক ভিডিও শর্টস)'
     },
     category: 'Video Editing',
     description: {
-      en: 'A fast-paced, engaging YouTube Short showcasing dynamic editing, visual pacing, and modern transitions.',
-      bn: 'একটি ডায়নামিক ইউটিউব শর্ট ভিডিও, যেখানে চমৎকার এডিটিং এবং ভিজ্যুয়াল ট্রানজিশন ফুটিয়ে তোলা হয়েছে।'
+      en: 'A fast-paced, high-energy YouTube Short showcasing modern dynamic editing, engaging cuts, sound design, and visual storytelling.',
+      bn: 'একটি চমৎকার ও আকর্ষক ইউটিউব শর্ট ভিডিও, যেখানে আধুনিক ডায়নামিক এডিটিং, দ্রুতগতির কাটস এবং ভিজ্যুয়াল স্টোরিটেলিং ফুটিয়ে তোলা হয়েছে।'
     },
-    thumbnail: 'https://img.youtube.com/vi/2zpRuB1L044/hqdefault.jpg',
+    thumbnail: 'https://img.youtube.com/vi/8AgmX8Mkhx0/maxresdefault.jpg',
     platform: 'YouTube',
-    projectUrl: 'https://youtube.com/shorts/2zpRuB1L044'
+    projectUrl: 'https://youtube.com/shorts/8AgmX8Mkhx0'
   },
   {
-    id: 'proj-2',
+    id: 'proj-standing',
     title: {
-      en: 'Project Placeholder: Motion Graphics',
-      bn: 'প্রজেক্ট প্লেসহোল্ডার: মোশন গ্রাফিক্স'
+      en: 'Job Seeking vs Skill Development Awareness',
+      bn: 'পড়াশোনা শেষ করে চাকরির জন্য ঘুরবেন?'
+    },
+    category: 'Video Editing',
+    description: {
+      en: 'A high-impact social and career awareness video asking why people are standing in line, emphasizing skill development over aimless job searching.',
+      bn: 'পড়াশোনা শেষ করে শুধু চাকরির পেছনে না ছুটে আধুনিক দক্ষতা অর্জনের সচেতনতামূলক বার্তা নিয়ে তৈরি শক্তিশালী ভিডিও।'
+    },
+    thumbnail: 'https://i.ytimg.com/vi/K-ONAMpGz6k/hqdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtube.com/shorts/K-ONAMpGz6k'
+  },
+  {
+    id: 'proj-animation-camera',
+    title: {
+      en: 'Animation & Camera (3D Motion)',
+      bn: 'অ্যানিমেশন ও ক্যামেরা (থ্রিডি মোশন)'
     },
     category: 'Motion Graphics',
     description: {
-      en: 'A placeholder for a future motion graphics and animation project.',
-      bn: 'ভবিষ্যতের একটি মোশন গ্রাফিক্স প্রজেক্টের প্লেসহোল্ডার।'
+      en: '3D camera movement and keyframe animation project demonstrating dynamic spatial pacing and motion control.',
+      bn: 'থ্রিডি ক্যামেরা মুভমেন্ট এবং কি-ফ্রেম অ্যানিমেশন প্রজেক্ট, যেখানে আকর্ষণীয় ভিজ্যুয়াল মোশন ও ক্যামেরা অ্যাঙ্গেল ফুটিয়ে তোলা হয়েছে।'
     },
-    thumbnail: '',
-    platform: 'Behance',
-    projectUrl: ''
+    thumbnail: 'https://img.youtube.com/vi/qBSJ-SGVw_c/maxresdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtu.be/qBSJ-SGVw_c'
   },
   {
-    id: 'proj-3',
+    id: 'proj-as-sunnah-sbmc',
     title: {
-      en: 'Independence Day',
-      bn: 'স্বাধীনতা দিবস'
-    },
-    category: 'Graphic Design',
-    description: {
-      en: 'A creative graphic design project celebrating Independence Day.',
-      bn: 'স্বাধীনতা দিবস উদযাপনের জন্য তৈরি একটি চমৎকার গ্রাফিক ডিজাইন প্রজেক্ট।'
-    },
-    thumbnail: 'https://i.postimg.cc/B6DMzdYq/freedome-day-10.jpg',
-    platform: 'Behance',
-    projectUrl: 'https://www.behance.net/gallery/253751439/Independene-Day'
-  },
-  {
-    id: 'proj-4',
-    title: {
-      en: 'My Work with Premiere Pro',
-      bn: 'আমার কাজে প্রিমিয়ার প্রো'
+      en: 'Small Business Management Course - As-Sunnah',
+      bn: 'স্মল বিজনেস ম্যানেজমেন্ট কোর্স - আস-সুন্নাহ'
     },
     category: 'Video Editing',
     description: {
-      en: 'A showcase of video editing using Adobe Premiere Pro.',
-      bn: 'অ্যাডোবি প্রিমিয়ার প্রো ব্যবহার করে ভিডিও এডিটিংয়ের একটি চমৎকার প্রজেক্ট।'
+      en: 'Promotional video highlighting business leadership, digital skills, video editing, and modern career development at As-Sunnah Skill Development Institute.',
+      bn: 'আস-সুন্নাহ স্কিল ডেভেলপমেন্ট ইনস্টিটিউটের স্মল বিজনেস ম্যানেজমেন্ট কোর্সের প্রশিক্ষণ ও সুযোগ নিয়ে তৈরি প্রমোশনাল ভিডিও।'
+    },
+    thumbnail: 'https://img.youtube.com/vi/-V8bqtyfLc8/hqdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtu.be/-V8bqtyfLc8'
+  },
+  {
+    id: 'proj-sbmc-ad',
+    title: {
+      en: 'SBMC – Promotional Advertisement',
+      bn: 'এসবিএমসি – প্রমোশনাল অ্যাডভার্টাইজমেন্ট'
+    },
+    category: 'Video Editing',
+    description: {
+      en: 'A promotional advertisement focusing on visual storytelling, clean editing, motion graphics, and typography for SBMC training opportunities.',
+      bn: 'ভিজ্যুয়াল স্টোরিটেলিং, মসৃণ ট্রানজিশন এবং প্রফেশনাল টাইপোগ্রাফির সমন্বয়ে তৈরি প্রমোশনাল অ্যাডভার্টাইজমেন্ট।'
+    },
+    thumbnail: 'https://img.youtube.com/vi/B6jtyeDaK6w/hqdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtu.be/B6jtyeDaK6w'
+  },
+  {
+    id: 'proj-nafees-review',
+    title: {
+      en: 'As-Sunnah Institute Review | Nafees Salim',
+      bn: 'আস-সুন্নাহ রিভিউ | নাফিস সালিম'
+    },
+    category: 'Video Editing',
+    description: {
+      en: 'A testimonial and review video featuring Nafees Salim sharing his experience with As-Sunnah Skill Development Institute.',
+      bn: 'আস-সুন্নাহ স্কিল ডেভেলপমেন্ট ইনস্টিটিউটের অভিজ্ঞতার ওপর তৈরি ক্লিন ও প্রফেশনাল রিভিউ ভিডিও।'
     },
     thumbnail: 'https://img.youtube.com/vi/RRoi5USOeco/hqdefault.jpg',
     platform: 'YouTube',
     projectUrl: 'https://youtu.be/RRoi5USOeco'
   },
   {
-    id: 'proj-5',
+    id: 'proj-nazmul-ae',
     title: {
-      en: 'Ads Typography',
-      bn: 'অ্যাডস টাইপোগ্রাফি'
+      en: 'Nazmul Huda Sir – After Effects Motion Graphics',
+      bn: 'নাজমুল হুদা স্যার – আফটার ইফেক্টস মোশন গ্রাফিক্স'
     },
-    category: 'Graphic Design',
+    category: 'Motion Graphics',
     description: {
-      en: 'A creative advertising typography design, created using Adobe Photoshop and Illustrator.',
-      bn: 'অ্যাডোবি ফটোশপ এবং ইলাস্ট্রেটর ব্যবহার করে তৈরি করা একটি চমৎকার অ্যাডস টাইপোগ্রাফি ডিজাইন।'
+      en: 'A creative motion graphics project created in Adobe After Effects showcasing typography, transitions, and visual effects.',
+      bn: 'অ্যাডোবি আফটার ইফেক্টসে তৈরি ক্রিয়েটিভ মোশন ডিজাইন, অ্যানিমেশন এবং ভিজ্যুয়াল এফেক্টসের প্রজেক্ট।'
     },
-    thumbnail: 'https://i.postimg.cc/C1tqp12M/juh.jpg',
-    platform: 'Behance',
-    projectUrl: 'https://www.behance.net/gallery/254718905/Ads-Typography'
+    thumbnail: 'https://img.youtube.com/vi/2zpRuB1L044/hqdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtube.com/shorts/2zpRuB1L044'
   },
   {
-    id: 'proj-6',
+    id: 'proj-steak',
     title: {
       en: 'Steak House Promotional Poster',
       bn: 'স্টেক হাউস প্রমোশনাল পোস্টার'
@@ -92,33 +122,33 @@ export const projectsData: Project[] = [
     projectUrl: 'https://www.behance.net/gallery/255395839/Steak-House-Restaurant-Promotional-Poster-Design'
   },
   {
-    id: 'proj-7',
+    id: 'proj-ads-typography',
     title: {
-      en: 'Nazmul Sir (YouTube Shorts)',
-      bn: 'নাজমুল স্যার (ইউটিউব শর্টস)'
+      en: 'Ads Typography',
+      bn: 'অ্যাডস টাইপোগ্রাফি'
     },
-    category: 'Video Editing',
+    category: 'Graphic Design',
     description: {
-      en: 'A fast-paced, high-energy YouTube Short showcasing modern dynamic editing, engaging cuts, and visual storytelling.',
-      bn: 'একটি চমৎকার ও আকর্ষক ইউটিউব শর্ট ভিডিও, যেখানে আধুনিক ডায়নামিক এডিটিং, দ্রুতগতির কাটস এবং ভিজ্যুয়াল স্টোরিটেলিং ফুটিয়ে তোলা হয়েছে।'
+      en: 'A creative advertising typography design, created using Adobe Photoshop and Illustrator.',
+      bn: 'অ্যাডোবি ফটোশপ এবং ইলাস্ট্রেটর ব্যবহার করে তৈরি করা একটি চমৎকার অ্যাডস টাইপোগ্রাফি ডিজাইন।'
     },
-    thumbnail: 'https://img.youtube.com/vi/8AgmX8Mkhx0/maxresdefault.jpg',
-    platform: 'YouTube',
-    projectUrl: 'https://youtube.com/shorts/8AgmX8Mkhx0'
+    thumbnail: 'https://i.postimg.cc/C1tqp12M/juh.jpg',
+    platform: 'Behance',
+    projectUrl: 'https://www.behance.net/gallery/254718905/Ads-Typography'
   },
   {
-    id: 'proj-8',
+    id: 'proj-independence-day',
     title: {
-      en: 'Animation & Camera',
-      bn: 'অ্যানিমেশন ও ক্যামেরা'
+      en: 'Independence Day',
+      bn: 'স্বাধীনতা দিবস'
     },
-    category: 'Motion Graphics',
+    category: 'Graphic Design',
     description: {
-      en: '3D camera movement and keyframe animation project demonstrating dynamic spatial pacing and motion control.',
-      bn: 'থ্রিডি ক্যামেরা মুভমেন্ট এবং কি-ফ্রেম অ্যানিমেশন প্রজেক্ট, যেখানে আকর্ষণীয় ভিজ্যুয়াল মোশন ও ক্যামেরা অ্যাঙ্গেল ফুটিয়ে তোলা হয়েছে।'
+      en: 'A creative graphic design project celebrating Independence Day.',
+      bn: 'স্বাধীনতা দিবস উদযাপনের জন্য তৈরি একটি চমৎকার গ্রাফিক ডিজাইন প্রজেক্ট।'
     },
-    thumbnail: 'https://img.youtube.com/vi/qBSJ-SGVw_c/maxresdefault.jpg',
-    platform: 'YouTube',
-    projectUrl: 'https://youtu.be/qBSJ-SGVw_c'
+    thumbnail: 'https://i.postimg.cc/B6DMzdYq/freedome-day-10.jpg',
+    platform: 'Behance',
+    projectUrl: 'https://www.behance.net/gallery/253751439/Independene-Day'
   }
 ];

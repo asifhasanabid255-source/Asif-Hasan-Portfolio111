@@ -21,12 +21,12 @@ interface SectionContextType {
 const SectionContext = createContext<SectionContextType | undefined>(undefined);
 
 export function SectionProvider({ children }: { children: React.ReactNode }) {
-  const [activeSection, setActiveSectionState] = useState<SectionId>('home');
+  const [activeSection, setActiveSectionState] = useState<SectionId>('portfolio');
 
   const scrollToSection = useCallback((section: SectionId) => {
     setActiveSectionState(section);
 
-    const targetId = section === 'certificates' ? 'education' : section;
+    const targetId = (section === 'home' || section === 'portfolio') ? 'portfolio' : section === 'certificates' ? 'education' : section;
     const element = document.getElementById(targetId);
 
     if (element) {
@@ -91,9 +91,9 @@ export function SectionProvider({ children }: { children: React.ReactNode }) {
             return;
           }
 
-          // If at the very top, activate home
+          // If at the very top, activate portfolio
           if (window.scrollY < 120) {
-            setActiveSectionState('home');
+            setActiveSectionState('portfolio');
             ticking = false;
             return;
           }

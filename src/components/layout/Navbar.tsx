@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useSection, SectionId } from '../../context/SectionContext';
 import { LanguageSwitcher } from '../ui/LanguageSwitcher';
+import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 import { Button } from '../ui/Button';
 import { personalData } from '../../data/personal';
 
@@ -22,27 +23,28 @@ export function Navbar() {
   }, []);
 
   const headerNavItems: Array<{ label: string; href: string; id: SectionId }> = [
-    { label: t.nav.home, href: '#home', id: 'home' },
-    { label: t.nav.skills, href: '#skills', id: 'skills' },
     { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
+    { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.skills, href: '#skills', id: 'skills' },
     { label: t.nav.services, href: '#services', id: 'services' },
-    { label: t.nav.experience, href: '#experience', id: 'experience' },
     { label: t.nav.cv, href: '#cv', id: 'cv' },
   ];
 
   const dropdownNavItems: Array<{ label: string; href: string; id: SectionId }> = [
-    { label: t.nav.home, href: '#home', id: 'home' },
+    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
     { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.skills, href: '#skills', id: 'skills' },
+    { label: t.nav.services, href: '#services', id: 'services' },
+    { label: t.nav.experience, href: '#experience', id: 'experience' },
     { label: t.nav.education, href: '#education', id: 'education' },
     { label: t.nav.certificates, href: '#certificates', id: 'certificates' },
     { label: t.nav.contact, href: '#contact', id: 'contact' },
   ];
 
   const allNavItems: Array<{ label: string; href: string; id: SectionId }> = [
-    { label: t.nav.home, href: '#home', id: 'home' },
+    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
     { label: t.nav.about, href: '#about', id: 'about' },
     { label: t.nav.skills, href: '#skills', id: 'skills' },
-    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
     { label: t.nav.services, href: '#services', id: 'services' },
     { label: t.nav.experience, href: '#experience', id: 'experience' },
     { label: t.nav.education, href: '#education', id: 'education' },
@@ -74,8 +76,8 @@ export function Navbar() {
           {/* Logo / Brand Name */}
           <div className="flex-shrink-0 flex items-center gap-2">
             <a 
-              href="#home" 
-              onClick={(e) => handleNavClick(e, 'home')}
+              href="#portfolio" 
+              onClick={(e) => handleNavClick(e, 'portfolio')}
               className="flex items-center gap-2.5 sm:gap-3 font-bold text-lg sm:text-xl md:text-2xl tracking-tight text-primary-text hover:text-primary-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-accent rounded-sm"
             >
               <img src="/logo.jpg" alt="Logo" className="h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 object-cover rounded-full" />
@@ -104,8 +106,9 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Desktop Right Section: Language Switcher, Contact Button & Menu Toggle */}
-          <div className="hidden lg:flex items-center gap-2 md:gap-4">
+          {/* Desktop Right Section: Language Switcher, Theme Switcher, Contact Button & Menu Toggle */}
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+            <ThemeSwitcher />
             <LanguageSwitcher />
             
             <Button 
@@ -185,8 +188,15 @@ export function Navbar() {
                   );
                 })}
                 
-                {/* Language Switcher and Contact Button inside Mobile Drawer */}
+                {/* Theme Switcher, Language Switcher and Contact Button inside Mobile Drawer */}
                 <div className="pt-4 mt-3 border-t border-border/70 flex flex-col gap-3">
+                  <div className="flex items-center justify-between px-3 py-1">
+                    <span className="text-sm font-medium text-secondary-text">
+                      {language === 'bn' ? 'থিম মোড' : 'Theme'}
+                    </span>
+                    <ThemeSwitcher compact />
+                  </div>
+
                   <div className="flex items-center justify-between px-3 py-1">
                     <span className="text-sm font-medium text-secondary-text">
                       {language === 'bn' ? 'ভাষা পরিবর্তন' : 'Language'}

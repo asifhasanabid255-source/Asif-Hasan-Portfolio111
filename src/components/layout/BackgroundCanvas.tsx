@@ -8,11 +8,11 @@ export function BackgroundCanvas() {
       aria-hidden="true"
     >
       {/* Base subtle warm-cool gradient canvas */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-[#F4F6F9] to-[#F1F4F8]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-[#F4F6F9] to-[#F1F4F8] dark:from-[#090B10] dark:via-[#0E131E] dark:to-[#090B10] transition-colors duration-500" />
 
-      {/* Modern Studio Dot Matrix Canvas Grid */}
+      {/* Modern Studio Dot Matrix Canvas Grid - visible in light mode only */}
       <div 
-        className="absolute inset-0 opacity-[0.45]"
+        className="absolute inset-0 opacity-[0.45] dark:hidden"
         style={{
           backgroundImage: `
             radial-gradient(circle at center, rgba(30, 58, 138, 0.12) 1.2px, transparent 1.2px),
@@ -87,7 +87,7 @@ export function BackgroundCanvas() {
       />
 
       {/* Subtle Studio / Film Editor Watermarks & Grid Marks */}
-      <div className="absolute inset-0 flex flex-col justify-between py-12 px-8 opacity-[0.3] hidden md:flex">
+      <div className="absolute inset-0 flex flex-col justify-between py-12 px-8 opacity-[0.3] hidden md:flex dark:hidden">
         {/* Top Timecode & FPS indicator */}
         <div className="flex justify-between items-center text-[11px] font-mono tracking-widest text-slate-400">
           <div className="flex items-center gap-3">

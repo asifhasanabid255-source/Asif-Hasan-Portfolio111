@@ -4,20 +4,20 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useSection } from '../../context/SectionContext';
 import { personalData } from '../../data/personal';
 import { ArrowUp, Mail, Phone, Youtube } from 'lucide-react';
+import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 
 export function Footer() {
   const { language, t } = useLanguage();
   const { scrollToSection } = useSection();
 
   const handleBackToTop = () => {
-    scrollToSection('home');
+    scrollToSection('portfolio');
   };
 
   const navLinks = [
-    { label: t.nav.home, id: 'home' as const },
+    { label: t.nav.portfolio, id: 'portfolio' as const },
     { label: t.nav.about, id: 'about' as const },
     { label: t.nav.skills, id: 'skills' as const },
-    { label: t.nav.portfolio, id: 'portfolio' as const },
     { label: t.nav.services, id: 'services' as const },
     { label: t.nav.experience, id: 'experience' as const },
     { label: t.nav.education, id: 'education' as const },
@@ -131,15 +131,18 @@ export function Footer() {
               </div>
             </div>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleBackToTop}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-white-surface text-xs font-medium text-secondary-text hover:text-primary-accent shadow-xs cursor-pointer"
-            >
-              <ArrowUp size={14} />
-              <span>{language === 'bn' ? 'উপরে যান' : 'Back to top'}</span>
-            </motion.button>
+            <div className="flex items-center gap-3">
+              <ThemeSwitcher compact />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleBackToTop}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-white-surface text-xs font-medium text-secondary-text hover:text-primary-accent shadow-xs cursor-pointer"
+              >
+                <ArrowUp size={14} />
+                <span>{language === 'bn' ? 'উপরে যান' : 'Back to top'}</span>
+              </motion.button>
+            </div>
           </div>
 
         </div>

@@ -2,9 +2,9 @@ export default {
   // Navigation
   nav: {
     home: 'Home',
-    about: 'About',
+    about: 'About Me',
     skills: 'Skills',
-    portfolio: 'My Projects',
+    portfolio: 'Works',
     services: 'Services',
     experience: 'Experience',
     education: 'Education',
