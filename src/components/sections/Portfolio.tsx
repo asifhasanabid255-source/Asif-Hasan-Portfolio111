@@ -1,25 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
 import { SectionHeading } from '../ui/SectionHeading';
 import { projectsData } from '../../data/projects';
 import { ProjectCategory } from '../../types';
-import { ExternalLink, Image as ImageIcon, Play, ArrowUpRight } from 'lucide-react';
+import { ExternalLink, Image as ImageIcon, Play, ArrowUpRight, Film, Sparkles, FolderKanban } from 'lucide-react';
 
 export function Portfolio() {
   const { language, t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<'All' | ProjectCategory>('All');
 
-  const filters: Array<{ id: 'All' | ProjectCategory; label: string }> = [
-    { id: 'All', label: t.portfolio.filters.all },
-    { id: 'Video Editing', label: t.portfolio.filters.videoEditing },
-    { id: 'Motion Graphics', label: t.portfolio.filters.motionGraphics },
-    { id: 'Graphic Design', label: t.portfolio.filters.graphicDesign },
-  ];
+  // Categorize all video projects and graphic design projects
+  const videoProjects = useMemo(() => {
+    return projectsData.filter(
+      p => p.category === 'Video Editing' || p.category === 'Motion Graphics' || p.platform === 'YouTube'
+    );
+  }, []);
 
-  const filteredProjects = projectsData.filter(
-    project => activeFilter === 'All' || project.category === activeFilter
-  );
+  const graphicProjects = useMemo(() => {
+    return projectsData.filter(
+      p => p.category === 'Graphic Design' || p.platform === 'Behance'
+    );
+  }, []);
+
+  const motionGraphicsProjects = useMemo(() => {
+    return projectsData.filter(p => p.category === 'Motion Graphics');
+  }, []);
+
+  // Rules:
+  // In the 'All' tab:
+  // - Exactly 2 rows of video (6 videos: 3 per row)
+  // - Exactly 1 row of graphic design (3 designs: 3 per row)
+  // - Any extra video past 6 is hidden in 'All', but viewable in 'Video Editing'
+  const MAX_ALL_VIDEOS = 6;
+  const MAX_ALL_GRAPHICS = 3;
+
+  const displayProjects = useMemo(() => {
+    if (activeFilter === 'All') {
+      const topVideos = videoProjects.slice(0, MAX_ALL_VIDEOS);
+      const topGraphics = graphicProjects.slice(0, MAX_ALL_GRAPHICS);
+      return [...topVideos, ...topGraphics];
+    }
+    if (activeFilter === 'Video Editing') {
+      // Shows ALL video editing projects (including the ones hidden on the 'All' view)
+      return videoProjects;
+    }
+    if (activeFilter === 'Graphic Design') {
+      return graphicProjects;
+    }
+    if (activeFilter === 'Motion Graphics') {
+      return motionGraphicsProjects;
+    }
+    return projectsData;
+  }, [activeFilter, videoProjects, graphicProjects, motionGraphicsProjects]);
+
+  const hiddenVideoCount = Math.max(0, videoProjects.length - MAX_ALL_VIDEOS);
+
+  const filters: Array<{ id: 'All' | ProjectCategory; label: string; count: number }> = [
+    { 
+      id: 'All', 
+      label: t.portfolio.filters.all, 
+      count: Math.min(videoProjects.length, MAX_ALL_VIDEOS) + Math.min(graphicProjects.length, MAX_ALL_GRAPHICS) 
+    },
+    { 
+      id: 'Video Editing', 
+      label: t.portfolio.filters.videoEditing, 
+      count: videoProjects.length 
+    },
+    { 
+      id: 'Motion Graphics', 
+      label: t.portfolio.filters.motionGraphics, 
+      count: motionGraphicsProjects.length 
+    },
+    { 
+      id: 'Graphic Design', 
+      label: t.portfolio.filters.graphicDesign, 
+      count: graphicProjects.length 
+    },
+  ];
 
   return (
     <section id="home" className="pt-4 sm:pt-8 md:pt-10 pb-12 md:pb-16 scroll-mt-20 lg:scroll-mt-24 bg-transparent overflow-hidden">
@@ -48,7 +106,7 @@ export function Portfolio() {
           </motion.div>
         </div>
 
-        {/* Top Featured Video Showcase: "এই মানুষগুলো এখানে কেন দাঁড়িয়ে আছে" */}
+        {/* Top Featured Video Showcase: NASHRUS SIRAH REGISTRATION (Always fixed at top) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,12 +116,12 @@ export function Portfolio() {
           <div className="bg-white-surface/90 backdrop-blur-md rounded-3xl p-4 sm:p-6 lg:p-8 border border-border/80 shadow-md">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
               
-              {/* Left: Embedded Short Video Player (5 cols) */}
-              <div className="lg:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-[270px] sm:max-w-[300px] aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-border/90 bg-black">
+              {/* Left: Embedded Video Player (7 cols on lg for 16:9 widescreen video) */}
+              <div className="lg:col-span-7 flex justify-center w-full">
+                <div className="relative w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-border/90 bg-black">
                   <iframe
-                    src="https://www.youtube.com/embed/8AgmX8Mkhx0?rel=0&modestbranding=1"
-                    title={language === 'bn' ? 'নাজমুল স্যার - এই মানুষগুলো এখানে কেন দাঁড়িয়ে আছে?' : 'Nazmul Sir - Why Are These People Standing Here?'}
+                    src="https://www.youtube.com/embed/A3FxMVUsldA?rel=0&modestbranding=1"
+                    title={language === 'bn' ? 'নশরুস সিরাহ রেজিস্ট্রেশন - অফিসিয়াল ভিডিও' : 'NASHRUS SIRAH REGISTRATION - Official Video'}
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
@@ -71,29 +129,29 @@ export function Portfolio() {
                 </div>
               </div>
 
-              {/* Right: Info, Hook & Action (7 cols) */}
-              <div className="lg:col-span-7 flex flex-col items-start space-y-3.5">
+              {/* Right: Info, Hook & Action (5 cols on lg) */}
+              <div className="lg:col-span-5 flex flex-col items-start space-y-3.5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-accent/10 border border-primary-accent/25 text-primary-accent text-xs font-bold uppercase tracking-wider">
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  {language === 'bn' ? 'সর্বপ্রথম ভিডিও • ফিচার্ড রিলিজ' : 'First Video • Featured Release'}
+                  {language === 'bn' ? 'সর্বপ্রথম ভিডিও • অফিসিয়াল রিলিজ' : 'First Video • Official Release'}
                 </div>
 
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary-text leading-tight">
                   {language === 'bn' 
-                    ? 'নাজমুল স্যার — এই মানুষগুলো এখানে কেন দাঁড়িয়ে আছে?' 
-                    : 'Nazmul Sir — Dynamic Short Video'}
+                    ? 'নশরুস সিরাহ রেজিস্ট্রেশন' 
+                    : 'NASHRUS SIRAH REGISTRATION'}
                 </h3>
 
                 <p className="text-sm font-semibold text-primary-accent">
-                  {language === 'bn'
-                    ? 'ডায়নামিক ভিডিও এডিটিং ও ভিজ্যুয়াল স্টোরিটেলিং'
-                    : 'Dynamic Video Editing & Visual Storytelling'}
+                  {language === 'bn' 
+                    ? 'অফিসিয়াল প্রমোশনাল ও রেজিস্ট্রেশন ভিডিও' 
+                    : 'Official Promotional & Registration Video'}
                 </p>
 
                 <p className="text-xs sm:text-sm text-secondary-text leading-relaxed">
                   {language === 'bn'
-                    ? 'এই মানুষগুলো এখানে কেন দাঁড়িয়ে আছে নিয়ে তৈরি আকর্ষণীয় ও ডায়নামিক ভিডিও এডিটিং প্রজেক্ট। দ্রুতগতির কাটস, চমৎকার সাউন্ড এফেক্টস ও টেক্সট মোশনের সমন্বয়ে তৈরি।'
-                    : 'A high-energy, engaging short video featuring dynamic pacing, modern cuts, sound design, and text animation.'}
+                    ? 'নশরুস সিরাহ-এর রেজিস্ট্রেশন সংক্রান্ত বিস্তারিত তথ্য ও গাইডলাইন সুন্দরভাবে তুলে ধরতে তৈরি প্রফেশনাল ভিডিও। মসৃণ এডিটিং, আকর্ষক টাইপোগ্রাফি ও তথ্যবহুল ভিজ্যুয়াল প্রেজেন্টেশন।'
+                    : 'Official registration promotional video for Nashrus Sirah, featuring clean video editing, dynamic typography, and clear visual information flow.'}
                 </p>
 
                 <div className="flex flex-wrap gap-2 pt-1">
@@ -101,22 +159,22 @@ export function Portfolio() {
                     Adobe Premiere Pro
                   </span>
                   <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-secondary-text">
-                    After Effects
+                    Motion Graphics
                   </span>
                   <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-secondary-text">
-                    Sound Design & Motion
+                    Typography & Sound
                   </span>
                 </div>
 
                 <div className="pt-2 flex flex-wrap items-center gap-3">
                   <a
-                    href="https://youtube.com/shorts/8AgmX8Mkhx0"
+                    href="https://youtu.be/A3FxMVUsldA"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-sm transition-colors"
                   >
                     <Play size={13} fill="currentColor" />
-                    {language === 'bn' ? 'ইউটিউবে ওপেন করুন' : 'Watch on YouTube'}
+                    {language === 'bn' ? 'ইউটিউবে দেখুন' : 'Watch on YouTube'}
                   </a>
                 </div>
               </div>
@@ -126,12 +184,18 @@ export function Portfolio() {
         </motion.div>
 
         {/* Section Sub-heading for other works */}
-        <div className="flex flex-col items-center text-center mb-4">
+        <div id="portfolio-grid" className="flex flex-col items-center text-center mb-4">
           <h3 className="text-lg sm:text-xl font-bold text-primary-text">
-            {language === 'bn' ? 'আমার অন্যান্য সর্বশেষ প্রজেক্টসমূহ' : 'Other Latest Projects & Works'}
+            {language === 'bn' ? 'লেটেস্ট প্রজেক্ট ও কাজসমূহ' : 'Latest Projects & Works'}
           </h3>
           <p className="text-xs sm:text-sm text-secondary-text mt-0.5">
-            {language === 'bn' ? 'ক্যাটাগরি অনুযায়ী ফিল্টার করে দেখুন' : 'Filter by category to explore more works'}
+            {activeFilter === 'All' 
+              ? (language === 'bn' 
+                  ? '২ লাইন ভিডিও (৬টি) ও ১ লাইন গ্রাফিক ডিজাইন (৩টি) • আরও ভিডিও দেখতে ক্যাটাগরিতে ক্লিক করুন' 
+                  : '2 rows of video (6) & 1 row of graphic design (3) • Click category for all works')
+              : (language === 'bn'
+                  ? `নির্বাচিত ক্যাটাগরির সকল কাজ প্রদর্শিত হচ্ছে (${displayProjects.length}টি)`
+                  : `Showing all projects in selected category (${displayProjects.length})`)}
           </p>
         </div>
 
@@ -149,14 +213,21 @@ export function Portfolio() {
               onClick={() => setActiveFilter(filter.id)}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary-accent ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary-accent flex items-center gap-1.5 ${
                 activeFilter === filter.id
                   ? 'bg-primary-accent text-white shadow-xs'
                   : 'bg-white-surface/85 backdrop-blur-sm text-secondary-text border border-border/70 hover:text-primary-text hover:border-primary-accent/30'
               }`}
               aria-pressed={activeFilter === filter.id}
             >
-              {filter.label}
+              <span>{filter.label}</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-semibold ${
+                activeFilter === filter.id
+                  ? 'bg-white/20 text-white'
+                  : 'bg-gray-100 dark:bg-gray-800 text-secondary-text'
+              }`}>
+                {filter.count}
+              </span>
             </motion.button>
           ))}
         </motion.div>
@@ -164,7 +235,7 @@ export function Portfolio() {
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => {
+            {displayProjects.map((project, index) => {
               const hasUrl = Boolean(project.projectUrl);
               return (
                 <motion.a
@@ -176,7 +247,7 @@ export function Portfolio() {
                   initial={{ opacity: 0, scale: 0.94, y: 15 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                  transition={{ duration: 0.35, delay: index * 0.05, ease: "easeOut" }}
+                  transition={{ duration: 0.35, delay: index * 0.04, ease: "easeOut" }}
                   whileHover={{ y: -6, transition: { duration: 0.2 } }}
                   className="bg-white-surface/85 backdrop-blur-md rounded-2xl overflow-hidden border border-border/70 shadow-sm group hover:shadow-[0_20px_40px_-12px_rgba(30,58,138,0.18)] hover:border-primary-accent/50 transition-all duration-300 flex flex-col cursor-pointer block text-left"
                   aria-label={`${project.title[language]} (${project.platform})`}
@@ -252,7 +323,52 @@ export function Portfolio() {
           </AnimatePresence>
         </div>
 
-        {filteredProjects.length === 0 && (
+        {/* Notice & Button on 'All' View when older videos are archived / hidden */}
+        {activeFilter === 'All' && hiddenVideoCount > 0 && (
+          <motion.div 
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mt-8 p-4 sm:p-5 rounded-2xl bg-white-surface/90 border border-border/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
+            <div className="flex items-center gap-3 text-left">
+              <div className="w-10 h-10 rounded-full bg-primary-accent/10 text-primary-accent flex items-center justify-center shrink-0">
+                <Film size={20} />
+              </div>
+              <div>
+                <p className="text-xs sm:text-sm font-semibold text-primary-text">
+                  {language === 'bn'
+                    ? `আরও ${hiddenVideoCount}টি পূর্বের ভিডিও প্রজেক্ট রয়েছে`
+                    : `${hiddenVideoCount} more video projects available in archive`}
+                </p>
+                <p className="text-[11px] sm:text-xs text-secondary-text">
+                  {language === 'bn'
+                    ? 'হোমপেজে ২ লাইন ভিডিও ও ১ লাইন গ্রাফিক্স সাজানো হয়েছে। সম্পূর্ণ ভিডিও দেখতে ভিডিও এডিটিং সিলেক্ট করুন।'
+                    : 'The homepage shows 2 rows of video & 1 row of graphics. Click below to view all videos.'}
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setActiveFilter('Video Editing');
+                const elem = document.getElementById('portfolio-grid');
+                if (elem) elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-primary-accent hover:bg-accent-hover text-white text-xs font-semibold shadow-xs transition-all shrink-0 cursor-pointer"
+            >
+              <Play size={13} fill="currentColor" />
+              <span>
+                {language === 'bn' 
+                  ? `সকল ভিডিও দেখুন (${videoProjects.length}টি)` 
+                  : `View All ${videoProjects.length} Videos`}
+              </span>
+            </button>
+          </motion.div>
+        )}
+
+        {/* Empty State */}
+        {displayProjects.length === 0 && (
           <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }}

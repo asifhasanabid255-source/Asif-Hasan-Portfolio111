@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSection } from '../../context/SectionContext';
 import { SectionHeading } from '../ui/SectionHeading';
 import { 
   FileText, 
@@ -14,7 +15,8 @@ import {
   CheckCircle2, 
   GraduationCap, 
   Briefcase, 
-  Sparkles
+  Sparkles,
+  ExternalLink
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { CVPdfTemplate } from '../cv/CVPdfTemplate';
@@ -23,10 +25,10 @@ import { jsPDF } from 'jspdf';
 
 export function CV() {
   const { language, t } = useLanguage();
+  const { isCVModalOpen, openCVModal, closeCVModal } = useSection();
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalLanguage, setModalLanguage] = useState<'en' | 'bn'>('en');
-  const [zoomScale, setZoomScale] = useState<number>(0.9);
+  const [zoomScale, setZoomScale] = useState<number>(0.92);
   
   const cvRef = useRef<HTMLDivElement>(null);
 
@@ -34,6 +36,17 @@ export function CV() {
   useEffect(() => {
     setModalLanguage(language);
   }, [language]);
+
+  // Handle ESC key to exit modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isCVModalOpen) {
+        closeCVModal();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isCVModalOpen, closeCVModal]);
 
   const handleDownloadPdf = async () => {
     if (!cvRef.current) return;
@@ -122,10 +135,11 @@ export function CV() {
             <div 
               onClick={() => {
                 setModalLanguage(language);
-                setIsModalOpen(true);
+                openCVModal();
               }}
               className="group relative cursor-pointer w-full max-w-[270px] sm:max-w-[290px] aspect-[1/1.414] bg-white rounded-lg p-3.5 shadow-[0_12px_30px_-10px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_40px_-10px_rgba(30,58,138,0.18)] border border-gray-300 transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col justify-between"
               style={{ fontFamily: '"Times New Roman", Times, Georgia, serif' }}
+              title={language === 'bn' ? 'ক্লিক করে ফুল পিডিএফ সিভি দেখুন' : 'Click to view full PDF CV'}
             >
               {/* Paper header */}
               <div className="flex items-start justify-between gap-1.5 pb-1.5 border-b border-gray-100">
@@ -137,7 +151,7 @@ export function CV() {
                     <p><span className="font-bold">Holding No:</span> 99, Kajibari, Satarkul, Badda, Dhaka</p>
                   </div>
                 </div>
-                <div className="w-8 h-10 border border-gray-300 rounded-sm overflow-hidden bg-white shrink-0 p-0.5">
+                <div className="w-8 h-10 border border-gray-300 rounded-xs overflow-hidden bg-white shrink-0 p-0.5">
                   <img src="/hero.png" alt="Profile" className="w-full h-full object-cover object-top" />
                 </div>
               </div>
@@ -173,7 +187,7 @@ export function CV() {
                     SKILLS
                   </span>
                   <p className="line-clamp-1 text-gray-800 text-[6.2px] leading-snug">
-                    <span className="font-bold">Hard Skills:</span> Premiere Pro, After Effects, Photoshop, Illustrator, Motion Graphics...
+                    <span className="font-bold">Hard Skills:</span> Premiere Pro, After Effects, Photoshop, Illustrator, Video Editing...
                   </p>
                 </div>
 
@@ -183,12 +197,12 @@ export function CV() {
                   </span>
                   <div className="flex items-center justify-between text-[6px]">
                     <div>
-                      <p className="font-bold">Borkotullah</p>
-                      <p className="text-gray-700">As-Sunnah SDI</p>
+                      <p className="font-bold">Nazmul Huda</p>
+                      <p className="text-gray-700">Senior Trainer [ Video Editing ]</p>
                     </div>
                     <div>
-                      <p className="font-bold">Mohammad Jabed Omar Jisan</p>
-                      <p className="text-gray-700">As-Sunnah SDI</p>
+                      <p className="font-bold">Borkotullah</p>
+                      <p className="text-gray-700">Senior Trainer [ Graphic Design ]</p>
                     </div>
                     <div className="w-4 h-4 border border-gray-300 p-0.5">
                       <img src="/portfolio-qr.png" alt="QR" className="w-full h-full object-contain" />
@@ -237,7 +251,7 @@ export function CV() {
                 </div>
                 <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-semibold">
                   <CheckCircle2 size={12} className="text-emerald-600" />
-                  <span>{isEn ? 'Official 1-Page CV' : 'অফিসিয়াল ১-পৃষ্ঠার সিভি'}</span>
+                  <span>{isEn ? 'Official 1-Page PDF' : 'অফিসিয়াল ১-পৃষ্ঠার পিডিএফ'}</span>
                 </div>
               </div>
 
@@ -278,8 +292,8 @@ export function CV() {
                     <CheckCircle2 size={15} />
                   </div>
                   <div>
-                    <span className="font-semibold text-primary-text block text-[11px]">{isEn ? 'Verified References' : 'যাচাইকৃত রেফারেন্স'}</span>
-                    <span className="text-secondary-text text-[10px] leading-snug">Borkotullah & Mohammad Jabed Omar Jisan</span>
+                    <span className="font-semibold text-primary-text block text-[11px]">{isEn ? 'Verified References' : 'রেফারেন্স'}</span>
+                    <span className="text-secondary-text text-[10px] leading-snug">Nazmul Huda & Borkotullah (As-Sunnah SDI)</span>
                   </div>
                 </div>
               </div>
@@ -290,9 +304,9 @@ export function CV() {
                   variant="outline" 
                   onClick={() => {
                     setModalLanguage(language);
-                    setIsModalOpen(true);
+                    openCVModal();
                   }}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 border-primary-accent text-primary-accent hover:bg-primary-accent/5 px-5 py-2.5 text-sm"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 border-primary-accent text-primary-accent hover:bg-primary-accent/5 px-5 py-2.5 text-sm cursor-pointer"
                 >
                   <Eye size={16} />
                   <span>{isEn ? 'View Full CV' : 'ফুল সিভি দেখুন'}</span>
@@ -302,7 +316,7 @@ export function CV() {
                   variant="primary" 
                   onClick={handleDownloadPdf}
                   disabled={isGenerating}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 text-sm shadow-md"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 text-sm shadow-md cursor-pointer"
                   aria-label={t.resume.actions.download}
                 >
                   {isGenerating ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
@@ -340,35 +354,44 @@ export function CV() {
         <CVPdfTemplate ref={cvRef} language={modalLanguage} />
       </div>
 
-      {/* CV Modal for Fullscreen Viewing */}
+      {/* CV Modal for Fullscreen PDF Viewing */}
       <AnimatePresence>
-        {isModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-black/75 backdrop-blur-md">
+        {isCVModalOpen && (
+          <div 
+            className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-md"
+            onClick={(e) => {
+              // Clicking outside the modal container closes it
+              if (e.target === e.currentTarget) {
+                closeCVModal();
+              }
+            }}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.96, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 15 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-5xl h-[94vh] bg-primary-bg rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-border/60"
+              className="relative w-full max-w-5xl h-[95vh] bg-primary-bg rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-border/60"
             >
               {/* Modal Header */}
               <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3 bg-white-surface border-b border-border shadow-sm z-10 shrink-0">
                 <div className="flex items-center gap-3">
-                  <h3 className="text-base sm:text-lg font-bold text-primary-text font-serif">
-                    {isEn ? 'Official Curriculum Vitae (A4)' : 'অফিসিয়াল জীবনবৃত্তান্ত (A4)'}
+                  <h3 className="text-base sm:text-lg font-bold text-primary-text font-serif flex items-center gap-2">
+                    <FileText size={18} className="text-primary-accent" />
+                    <span>{isEn ? 'Official Curriculum Vitae (A4)' : 'অফিসিয়াল জীবনবৃত্তান্ত (A4)'}</span>
                   </h3>
 
                   {/* Language switch inside modal */}
                   <div className="flex items-center bg-primary-bg rounded-lg p-0.5 border border-border text-xs">
                     <button 
                       onClick={() => setModalLanguage('en')}
-                      className={`px-3 py-1 rounded-md font-semibold transition-colors ${modalLanguage === 'en' ? 'bg-primary-accent text-white shadow-sm' : 'text-secondary-text hover:text-primary-text'}`}
+                      className={`px-3 py-1 rounded-md font-semibold transition-colors cursor-pointer ${modalLanguage === 'en' ? 'bg-primary-accent text-white shadow-sm' : 'text-secondary-text hover:text-primary-text'}`}
                     >
                       English (Original)
                     </button>
                     <button 
                       onClick={() => setModalLanguage('bn')}
-                      className={`px-3 py-1 rounded-md font-semibold transition-colors ${modalLanguage === 'bn' ? 'bg-primary-accent text-white shadow-sm' : 'text-secondary-text hover:text-primary-text'}`}
+                      className={`px-3 py-1 rounded-md font-semibold transition-colors cursor-pointer ${modalLanguage === 'bn' ? 'bg-primary-accent text-white shadow-sm' : 'text-secondary-text hover:text-primary-text'}`}
                     >
                       বাংলা
                     </button>
@@ -380,7 +403,7 @@ export function CV() {
                   <div className="hidden sm:flex items-center bg-primary-bg rounded-lg p-1 border border-border gap-1">
                     <button 
                       onClick={() => setZoomScale(prev => Math.max(0.6, prev - 0.1))}
-                      className="p-1 hover:bg-border/60 rounded text-secondary-text hover:text-primary-text transition-colors"
+                      className="p-1 hover:bg-border/60 rounded text-secondary-text hover:text-primary-text transition-colors cursor-pointer"
                       title="Zoom Out"
                     >
                       <ZoomOut size={16} />
@@ -390,14 +413,14 @@ export function CV() {
                     </span>
                     <button 
                       onClick={() => setZoomScale(prev => Math.min(1.3, prev + 0.1))}
-                      className="p-1 hover:bg-border/60 rounded text-secondary-text hover:text-primary-text transition-colors"
+                      className="p-1 hover:bg-border/60 rounded text-secondary-text hover:text-primary-text transition-colors cursor-pointer"
                       title="Zoom In"
                     >
                       <ZoomIn size={16} />
                     </button>
                     <button 
-                      onClick={() => setZoomScale(0.9)}
-                      className="p-1 hover:bg-border/60 rounded text-secondary-text hover:text-primary-text transition-colors"
+                      onClick={() => setZoomScale(0.92)}
+                      className="p-1 hover:bg-border/60 rounded text-secondary-text hover:text-primary-text transition-colors cursor-pointer"
                       title="Reset Zoom"
                     >
                       <RotateCcw size={14} />
@@ -410,19 +433,20 @@ export function CV() {
                     size="sm"
                     onClick={handleDownloadPdf}
                     disabled={isGenerating}
-                    className="flex items-center gap-1.5 text-xs sm:text-sm px-3 sm:px-4 py-1.5"
+                    className="flex items-center gap-1.5 text-xs sm:text-sm px-3 sm:px-4 py-1.5 cursor-pointer"
                   >
                     {isGenerating ? <Loader2 size={15} className="animate-spin" /> : <Download size={15} />}
                     <span>{isEn ? 'Download PDF' : 'ডাউনলোড'}</span>
                   </Button>
 
-                  {/* Close Modal Button */}
+                  {/* Close Modal Button (ক্রস চিহ্ন) */}
                   <button
-                    onClick={() => setIsModalOpen(false)}
-                    className="p-1.5 text-secondary-text hover:text-primary-text hover:bg-border/60 rounded-full transition-colors ml-1"
+                    onClick={() => closeCVModal()}
+                    className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-full transition-colors ml-1 cursor-pointer border border-transparent hover:border-red-200"
                     aria-label="Close modal"
+                    title={language === 'bn' ? 'সিভি থেকে বের হোন (Close)' : 'Close CV'}
                   >
-                    <X size={22} />
+                    <X size={24} strokeWidth={2.5} />
                   </button>
                 </div>
               </div>

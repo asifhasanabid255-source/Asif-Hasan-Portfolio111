@@ -1,6 +1,22 @@
 import { Project } from '../types';
 
 export const projectsData: Project[] = [
+  // --- Video Projects (Newest / Most Impactful First) ---
+  {
+    id: 'proj-uin4ywawmme',
+    title: {
+      en: 'Creative Showcase & Dynamic Visual Story',
+      bn: 'ক্রিয়েটিভ শোকেস ও ডায়নামিক ভিজ্যুয়াল স্টোরি'
+    },
+    category: 'Video Editing',
+    description: {
+      en: 'Engaging, modern video editing project featuring cinematic cuts, synchronized audio, clean motion graphics, and professional storytelling.',
+      bn: 'আধুনিক ও নান্দনিক ভিডিও এডিটিং প্রজেক্ট, যেখানে সিনেম্যাটিক কাটস, মানসম্মত অডিও সিঙ্ক, মোশন গ্রাফিক্স ও পেশাদার স্টোরিটেলিং উপস্থাপন করা হয়েছে।'
+    },
+    thumbnail: 'https://img.youtube.com/vi/uIN4ywAwmME/hqdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtu.be/uIN4ywAwmME'
+  },
   {
     id: 'proj-nazmul-sir-short',
     title: {
@@ -91,6 +107,8 @@ export const projectsData: Project[] = [
     platform: 'YouTube',
     projectUrl: 'https://youtu.be/RRoi5USOeco'
   },
+
+  // --- Archived / Additional Video Projects (Viewable inside Video Editing tab) ---
   {
     id: 'proj-nazmul-ae',
     title: {
@@ -105,6 +123,38 @@ export const projectsData: Project[] = [
     thumbnail: 'https://img.youtube.com/vi/2zpRuB1L044/hqdefault.jpg',
     platform: 'YouTube',
     projectUrl: 'https://youtube.com/shorts/2zpRuB1L044'
+  },
+  {
+    id: 'proj-nashrus-sirah',
+    title: {
+      en: 'NASHRUS SIRAH REGISTRATION',
+      bn: 'নশরুস সিরাহ রেজিস্ট্রেশন (NASHRUS SIRAH REGISTRATION)'
+    },
+    category: 'Video Editing',
+    description: {
+      en: 'Official registration & promotional video for Nashrus Sirah, featuring clean video editing, dynamic typography, and clear informational flow.',
+      bn: 'নশরুস সিরাহ-এর অফিসিয়াল রেজিস্ট্রেশন প্রমোশনাল ভিডিও। ঝকঝকে ভিডিও এডিটিং, আকর্ষক টাইপোগ্রাফি ও তথ্যবহুল ভিজ্যুয়াল প্রেজেন্টেশন।'
+    },
+    thumbnail: 'https://img.youtube.com/vi/A3FxMVUsldA/maxresdefault.jpg',
+    platform: 'YouTube',
+    projectUrl: 'https://youtu.be/A3FxMVUsldA'
+  },
+
+  // --- Graphic Design Projects (Newest First) ---
+  {
+    id: 'proj-airpods-pro',
+    title: {
+      en: 'AirPods Pro - Commercial Poster Design',
+      bn: 'এয়ারপডস প্রো - কমার্শিয়াল পোস্টার ডিজাইন'
+    },
+    category: 'Graphic Design',
+    description: {
+      en: 'A sleek, modern commercial product advertising poster design for Apple AirPods Pro, created using Adobe Photoshop and Illustrator.',
+      bn: 'অ্যাপল এয়ারপডস প্রো-এর জন্য তৈরি আধুনিক ও প্রিমিয়াম কমার্শিয়াল প্রোডাক্ট বিজ্ঞাপন পোস্টার ডিজাইন।'
+    },
+    thumbnail: 'https://i.postimg.cc/TwPdQssF/3849-Asif-Hasan-Airbuds.jpg',
+    platform: 'Behance',
+    projectUrl: 'https://www.behance.net/gallery/256137413/AirPods-Pro'
   },
   {
     id: 'proj-steak',

@@ -16,17 +16,36 @@ interface SectionContextType {
   activeSection: SectionId;
   setActiveSection: (section: SectionId) => void;
   scrollToSection: (section: SectionId) => void;
+  isCVModalOpen: boolean;
+  openCVModal: () => void;
+  closeCVModal: () => void;
 }
 
 const SectionContext = createContext<SectionContextType | undefined>(undefined);
 
 export function SectionProvider({ children }: { children: React.ReactNode }) {
   const [activeSection, setActiveSectionState] = useState<SectionId>('portfolio');
+  const [isCVModalOpen, setIsCVModalOpen] = useState(false);
+
+  const openCVModal = useCallback(() => {
+    setIsCVModalOpen(true);
+  }, []);
+
+  const closeCVModal = useCallback(() => {
+    setIsCVModalOpen(false);
+  }, []);
 
   const scrollToSection = useCallback((section: SectionId) => {
+    // When clicking any navigation link (including CV), always close the fullscreen modal so user can view the section on the page
+    setIsCVModalOpen(false);
     setActiveSectionState(section);
 
-    const targetId = (section === 'home' || section === 'portfolio') ? 'portfolio' : section === 'certificates' ? 'education' : section;
+    const targetId = (section === 'home' || section === 'portfolio') 
+      ? 'portfolio' 
+      : section === 'certificates' 
+        ? 'education' 
+        : section;
+        
     const element = document.getElementById(targetId);
 
     if (element) {
@@ -120,7 +139,14 @@ export function SectionProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <SectionContext.Provider value={{ activeSection, setActiveSection, scrollToSection }}>
+    <SectionContext.Provider value={{ 
+      activeSection, 
+      setActiveSection, 
+      scrollToSection,
+      isCVModalOpen,
+      openCVModal,
+      closeCVModal
+    }}>
       {children}
     </SectionContext.Provider>
   );
