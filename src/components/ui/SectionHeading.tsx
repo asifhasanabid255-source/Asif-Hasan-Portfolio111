@@ -15,11 +15,11 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={`flex flex-col ${alignment === 'center' ? 'items-center text-center' : 'items-start text-left'} ${className}`}>
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-medium tracking-tight text-primary-text mb-4">
+      <h2 className="text-2xl md:text-3xl font-display font-bold tracking-tight text-primary-text mb-1.5">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-lg md:text-xl text-secondary-text max-w-2xl font-light leading-relaxed">
+        <p className="text-xs md:text-sm text-secondary-text max-w-2xl font-normal leading-relaxed">
           {subtitle}
         </p>
       )}

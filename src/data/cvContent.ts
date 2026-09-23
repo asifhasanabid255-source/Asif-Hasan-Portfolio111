@@ -25,8 +25,8 @@ export const cvContent = {
         bn: 'হাফেজ-এ-কুরআন'
       },
       institution: {
-        en: 'Completed',
-        bn: 'সম্পন্ন'
+        en: 'Jamia Arabia Imdadul Uloom, Faridabad',
+        bn: 'জামিয়া আরাবিয়া ইমদাদুল উলুম, ফরিদাবাদ'
       },
       year: '2018',
       status: {
