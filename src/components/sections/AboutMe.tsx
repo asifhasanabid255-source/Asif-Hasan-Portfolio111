@@ -36,7 +36,7 @@ export function AboutMe() {
   };
 
   return (
-    <section id="about" className="pt-4 pb-8 md:pt-6 md:pb-10 scroll-mt-20 bg-transparent overflow-hidden relative">
+    <section id="about" className="pt-10 pb-12 md:pt-16 md:pb-16 scroll-mt-20 lg:scroll-mt-24 bg-transparent overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           

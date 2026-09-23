@@ -34,7 +34,7 @@ export function Services() {
   ];
 
   return (
-    <section id="services" className="pt-4 pb-8 md:pt-6 md:pb-10 bg-transparent overflow-hidden">
+    <section id="services" className="pt-10 pb-12 md:pt-16 md:pb-16 scroll-mt-20 lg:scroll-mt-24 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Header */}
