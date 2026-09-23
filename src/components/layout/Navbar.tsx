@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSection, SectionId } from '../../context/SectionContext';
 import { LanguageSwitcher } from '../ui/LanguageSwitcher';
 import { Button } from '../ui/Button';
 import { personalData } from '../../data/personal';
 
 export function Navbar() {
   const { language, t } = useLanguage();
+  const { activeSection, setActiveSection } = useSection();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -19,55 +21,40 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const headerNavItems = [
-    { label: t.nav.skills, href: '#skills' },
-    { label: t.nav.portfolio, href: '#portfolio' },
-    { label: t.nav.services, href: '#services' },
-    { label: t.nav.experience, href: '#experience' },
-    { label: t.nav.cv, href: '#cv' },
+  const headerNavItems: Array<{ label: string; href: string; id: SectionId }> = [
+    { label: t.nav.home, href: '#home', id: 'home' },
+    { label: t.nav.skills, href: '#skills', id: 'skills' },
+    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
+    { label: t.nav.services, href: '#services', id: 'services' },
+    { label: t.nav.experience, href: '#experience', id: 'experience' },
+    { label: t.nav.cv, href: '#cv', id: 'cv' },
   ];
 
-  const dropdownNavItems = [
-    { label: t.nav.home, href: '#home' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.education, href: '#education' },
-    { label: t.nav.certificates, href: '#certificates' },
-    { label: t.nav.contact, href: '#contact' },
+  const dropdownNavItems: Array<{ label: string; href: string; id: SectionId }> = [
+    { label: t.nav.home, href: '#home', id: 'home' },
+    { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.education, href: '#education', id: 'education' },
+    { label: t.nav.certificates, href: '#certificates', id: 'certificates' },
+    { label: t.nav.contact, href: '#contact', id: 'contact' },
   ];
 
-  const allNavItems = [
-    { label: t.nav.home, href: '#home' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.skills, href: '#skills' },
-    { label: t.nav.portfolio, href: '#portfolio' },
-    { label: t.nav.services, href: '#services' },
-    { label: t.nav.experience, href: '#experience' },
-    { label: t.nav.education, href: '#education' },
-    { label: t.nav.certificates, href: '#certificates' },
-    { label: t.nav.cv, href: '#cv' },
-    { label: t.nav.contact, href: '#contact' },
+  const allNavItems: Array<{ label: string; href: string; id: SectionId }> = [
+    { label: t.nav.home, href: '#home', id: 'home' },
+    { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.skills, href: '#skills', id: 'skills' },
+    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
+    { label: t.nav.services, href: '#services', id: 'services' },
+    { label: t.nav.experience, href: '#experience', id: 'experience' },
+    { label: t.nav.education, href: '#education', id: 'education' },
+    { label: t.nav.certificates, href: '#certificates', id: 'certificates' },
+    { label: t.nav.cv, href: '#cv', id: 'cv' },
+    { label: t.nav.contact, href: '#contact', id: 'contact' },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: SectionId) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    
-    if (href === '#home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    const element = document.querySelector(href);
-    if (element) {
-      const navOffset = window.innerWidth >= 1024 ? 76 : 64;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-
-      window.scrollTo({
-        top: Math.max(0, offsetPosition),
-        behavior: 'smooth'
-      });
-    }
+    setActiveSection(id);
   };
 
   return (
@@ -77,8 +64,8 @@ export function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white-surface/85 backdrop-blur-md shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] border-b border-border/70' 
-          : 'bg-white-surface/60 backdrop-blur-md border-b border-border/40'
+          ? 'bg-white-surface/90 backdrop-blur-md shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] border-b border-border/70' 
+          : 'bg-white-surface/75 backdrop-blur-md border-b border-border/40'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
@@ -88,7 +75,7 @@ export function Navbar() {
           <div className="flex-shrink-0 flex items-center gap-2">
             <a 
               href="#home" 
-              onClick={(e) => handleNavClick(e, '#home')}
+              onClick={(e) => handleNavClick(e, 'home')}
               className="flex items-center gap-2.5 sm:gap-3 font-bold text-lg sm:text-xl md:text-2xl tracking-tight text-primary-text hover:text-primary-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-accent rounded-sm"
             >
               <img src="/logo.jpg" alt="Logo" className="h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 object-cover rounded-full" />
@@ -97,17 +84,24 @@ export function Navbar() {
           </div>
 
           {/* Desktop Horizontal Navigation (Hidden on Mobile) */}
-          <nav className="hidden lg:flex items-center space-x-6 lg:space-x-8">
-            {headerNavItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="whitespace-nowrap text-sm font-medium text-secondary-text hover:text-primary-text hover:text-primary-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-accent rounded-sm px-1 py-0.5"
-              >
-                {item.label}
-              </a>
-            ))}
+          <nav className="hidden lg:flex items-center space-x-1.5 xl:space-x-3">
+            {headerNavItems.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`whitespace-nowrap text-sm transition-all outline-none focus-visible:ring-2 focus-visible:ring-primary-accent rounded-full px-3 py-1.5 ${
+                    isActive
+                      ? 'bg-primary-accent text-white shadow-xs font-semibold'
+                      : 'font-medium text-secondary-text hover:text-primary-text hover:bg-gray-100/60'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Desktop Right Section: Language Switcher, Contact Button & Menu Toggle */}
@@ -115,21 +109,16 @@ export function Navbar() {
             <LanguageSwitcher />
             
             <Button 
-              variant="primary" 
+              variant={activeSection === 'contact' ? 'secondary' : 'primary'} 
               size="sm"
-              onClick={() => {
-                const contactSection = document.querySelector('#contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              onClick={() => setActiveSection('contact')}
             >
               {t.action.contactMe}
             </Button>
             
             <button
               type="button"
-              className="inline-flex items-center justify-center p-1.5 ml-2 rounded-md text-primary-text hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-accent"
+              className="inline-flex items-center justify-center p-1.5 ml-1 rounded-md text-primary-text hover:bg-gray-100/80 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-accent transition-colors"
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle navigation menu"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -178,16 +167,23 @@ export function Navbar() {
               
               {/* Mobile View: All Navigation Items + Language Switcher + Contact Button Inside */}
               <div className="lg:hidden space-y-1">
-                {allNavItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
-                    className="block px-3.5 py-2.5 rounded-xl text-base font-medium text-primary-text hover:bg-gray-50 hover:text-primary-accent active:bg-gray-100 transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                ))}
+                {allNavItems.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.href}
+                      onClick={(e) => handleNavClick(e, item.id)}
+                      className={`block px-3.5 py-2.5 rounded-xl text-base font-medium transition-colors ${
+                        isActive
+                          ? 'bg-primary-accent text-white font-semibold shadow-xs'
+                          : 'text-primary-text hover:bg-gray-50 hover:text-primary-accent active:bg-gray-100'
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
                 
                 {/* Language Switcher and Contact Button inside Mobile Drawer */}
                 <div className="pt-4 mt-3 border-t border-border/70 flex flex-col gap-3">
@@ -204,12 +200,7 @@ export function Navbar() {
                       className="w-full justify-center py-3 text-sm font-semibold shadow-xs"
                       onClick={() => {
                         setIsMobileMenuOpen(false);
-                        const contactSection = document.querySelector('#contact');
-                        if (contactSection) {
-                          const navOffset = 64;
-                          const pos = contactSection.getBoundingClientRect().top + window.pageYOffset - navOffset;
-                          window.scrollTo({ top: Math.max(0, pos), behavior: 'smooth' });
-                        }
+                        setActiveSection('contact');
                       }}
                     >
                       {t.action.contactMe}
@@ -220,16 +211,23 @@ export function Navbar() {
 
               {/* Desktop View: Dropdown items when desktop menu button is toggled */}
               <div className="hidden lg:block space-y-1">
-                {dropdownNavItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
-                    className="block px-3 py-3 rounded-md text-base font-medium text-primary-text hover:bg-gray-50 hover:text-primary-accent transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                ))}
+                {dropdownNavItems.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <a
+                      key={item.id}
+                      href={item.href}
+                      onClick={(e) => handleNavClick(e, item.id)}
+                      className={`block px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                        isActive
+                          ? 'bg-primary-accent/10 text-primary-accent font-semibold'
+                          : 'text-primary-text hover:bg-gray-50 hover:text-primary-accent'
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
               </div>
 
             </div>

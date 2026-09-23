@@ -1,5 +1,6 @@
 import React from 'react';
-import { useLanguage } from './context/LanguageContext';
+import { AnimatePresence, motion } from 'motion/react';
+import { SectionProvider, useSection } from './context/SectionContext';
 import { Navbar } from './components/layout/Navbar';
 import { BackgroundCanvas } from './components/layout/BackgroundCanvas';
 import { Hero } from './components/sections/Hero';
@@ -12,43 +13,61 @@ import { Education } from './components/sections/Education';
 import { CV } from './components/sections/CV';
 import { Contact } from './components/sections/Contact';
 
-export default function App() {
-  const { language, t } = useLanguage();
+function MainContent() {
+  const { activeSection } = useSection();
+
+  const renderActiveSection = () => {
+    switch (activeSection) {
+      case 'home':
+        return <Hero key="home" />;
+      case 'about':
+        return <AboutMe key="about" />;
+      case 'skills':
+        return <SkillsAndTools key="skills" />;
+      case 'portfolio':
+        return <Portfolio key="portfolio" />;
+      case 'services':
+        return <Services key="services" />;
+      case 'experience':
+        return <Experience key="experience" />;
+      case 'education':
+      case 'certificates':
+        return <Education key="education" />;
+      case 'cv':
+        return <CV key="cv" />;
+      case 'contact':
+        return <Contact key="contact" />;
+      default:
+        return <Hero key="home" />;
+    }
+  };
 
   return (
-    <div className="min-h-screen pt-20 relative">
-      <BackgroundCanvas />
-      <Navbar />
-      
-      <main>
-        {/* Section 01: Hero */}
-        <Hero />
+    <main className="min-h-[calc(100vh-80px)] flex flex-col justify-start w-full relative z-10">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeSection}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.25, ease: 'easeInOut' }}
+          className="w-full"
+        >
+          {renderActiveSection()}
+        </motion.div>
+      </AnimatePresence>
+    </main>
+  );
+}
 
-        {/* Section 03: About Me */}
-        <AboutMe />
-        
-        {/* Section 04: Skills & Tools */}
-        <SkillsAndTools />
-
-        {/* Section 05: Portfolio / Selected Works */}
-        <Portfolio />
-
-        {/* Section 06: Services */}
-        <Services />
-
-        {/* Section 07: Experience & Training */}
-        <Experience />
-        
-        {/* Section 08: Education & Certificates */}
-        <Education />
-
-        {/* Section 09: CV / Resume */}
-        <CV />
-
-        {/* Section 10: Contact */}
-        <Contact />
-        
-      </main>
-    </div>
+export default function App() {
+  return (
+    <SectionProvider>
+      <div className="min-h-screen pt-16 lg:pt-20 relative flex flex-col justify-between overflow-x-hidden">
+        <BackgroundCanvas />
+        <Navbar />
+        <MainContent />
+      </div>
+    </SectionProvider>
   );
 }

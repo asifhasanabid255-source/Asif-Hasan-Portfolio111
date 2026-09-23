@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSection } from '../../context/SectionContext';
 import { Button } from '../ui/Button';
 import { Film, Sparkles, Play } from 'lucide-react';
 
@@ -65,17 +66,7 @@ const ProfileVisual = ({ language }: { language: 'en' | 'bn' }) => (
 
 export function Hero() {
   const { t, language } = useLanguage();
-
-  const handleScrollTo = (targetId: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.querySelector(targetId);
-    if (element) {
-      const navOffset = 76;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-      window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
-    }
-  };
+  const { setActiveSection } = useSection();
 
   return (
     <section id="home" className="relative min-h-[calc(100vh-80px)] flex items-center pt-6 md:pt-4 pb-10 overflow-hidden bg-transparent">
@@ -136,7 +127,10 @@ export function Hero() {
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Button 
                   href="#portfolio" 
-                  onClick={handleScrollTo('#portfolio')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveSection('portfolio');
+                  }}
                   variant="primary" 
                   size="sm"
                   className="px-5 py-2.5 text-xs sm:text-sm font-semibold shadow-xs"
@@ -148,7 +142,10 @@ export function Hero() {
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Button 
                   href="#contact" 
-                  onClick={handleScrollTo('#contact')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveSection('contact');
+                  }}
                   variant="outline" 
                   size="sm"
                   className="px-5 py-2.5 text-xs sm:text-sm font-semibold bg-white-surface"

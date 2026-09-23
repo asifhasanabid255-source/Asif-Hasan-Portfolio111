@@ -22,7 +22,7 @@ export function Portfolio() {
   );
 
   return (
-    <section id="portfolio" className="pt-4 pb-8 md:pt-6 md:pb-10 scroll-mt-20 bg-transparent overflow-hidden border-t border-border/40">
+    <section id="portfolio" className="pt-4 pb-8 md:pt-6 md:pb-10 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}

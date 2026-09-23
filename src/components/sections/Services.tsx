@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSection } from '../../context/SectionContext';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Video, Layers, PenTool, ArrowRight } from 'lucide-react';
 
 export function Services() {
   const { t } = useLanguage();
+  const { setActiveSection } = useSection();
 
   const servicesData = [
     {
@@ -31,19 +33,8 @@ export function Services() {
     },
   ];
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      const navOffset = 76;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-      window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section id="services" className="pt-4 pb-8 md:pt-6 md:pb-10 scroll-mt-20 bg-transparent overflow-hidden border-t border-border/40">
+    <section id="services" className="pt-4 pb-8 md:pt-6 md:pb-10 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Header */}
@@ -135,7 +126,10 @@ export function Services() {
           <p className="text-secondary-text text-xs sm:text-sm mb-1">{t.services.cta.question}</p>
           <motion.a 
             href="#contact" 
-            onClick={(e) => handleSmoothScroll(e, '#contact')}
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveSection('contact');
+            }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-1.5 text-base sm:text-lg font-bold text-primary-text hover:text-primary-accent transition-colors group outline-none focus-visible:ring-2 focus-visible:ring-primary-accent rounded-md px-2 py-0.5"

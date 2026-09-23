@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion, Variants } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSection } from '../../context/SectionContext';
 import { personalData } from '../../data/personal';
 import { Button } from '../ui/Button';
 import { Download, Sparkles } from 'lucide-react';
 
 export function AboutMe() {
   const { language, t } = useLanguage();
+  const { setActiveSection } = useSection();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -30,13 +32,7 @@ export function AboutMe() {
 
   const handleScrollToCV = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const element = document.querySelector('#cv');
-    if (element) {
-      const navOffset = 76;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
-      window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
-    }
+    setActiveSection('cv');
   };
 
   return (
