@@ -80,123 +80,38 @@ export function Portfolio() {
   ];
 
   return (
-    <section id="home" className="pt-4 sm:pt-8 md:pt-10 pb-12 md:pb-16 scroll-mt-20 lg:scroll-mt-24 bg-transparent overflow-hidden">
-      <span id="portfolio" className="block -mt-24 pt-24 invisible" aria-hidden="true" />
+    <section id="portfolio" className="pt-14 sm:pt-18 pb-14 md:pb-20 scroll-mt-20 lg:scroll-mt-24 bg-transparent overflow-hidden relative border-t border-border/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
-        {/* Section Header - Portfolio First */}
-        <div className="flex flex-col items-center text-center mb-5 sm:mb-6">
+        {/* Section Header - Latest Projects & Works */}
+        <div id="portfolio-grid" className="flex flex-col items-center text-center mb-6 sm:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            <div className="mb-2.5 inline-flex items-center justify-center gap-2 px-3 py-1 rounded-full bg-white-surface border border-border shadow-xs">
+            <div className="mb-2.5 inline-flex items-center justify-center gap-2 px-3.5 py-1 rounded-full bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800/50 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-primary-accent animate-pulse"></span>
-              <span className="text-[11px] sm:text-xs font-bold tracking-widest text-primary-text uppercase">
-                {language === 'bn' ? 'আসিফ হাসান • ভিডিও এডিটর ও ডিজাইনার' : 'ASIF HASAN • VIDEO EDITOR & DESIGNER'}
+              <span className="text-[11px] sm:text-xs font-bold tracking-widest text-primary-accent uppercase">
+                {language === 'bn' ? 'পোর্টফোলিও ও গ্যালারি' : 'PORTFOLIO & GALLERY'}
               </span>
             </div>
             
             <SectionHeading 
-              title={language === 'bn' ? 'নির্বাচিত সেরা কাজসমূহ' : 'Featured Creative Works'} 
-              subtitle={language === 'bn' ? 'ভিডিও এডিটিং, ৩ডি মোশন গ্রাফিক্স ও গ্রাফিক ডিজাইনের নির্বাচিত সেরা প্রজেক্ট' : 'Curated collection of high-impact video editing, 3D motion, and graphic design'}
+              title={language === 'bn' ? 'লেটেস্ট প্রজেক্ট ও কাজসমূহ' : 'Latest Projects & Works'} 
+              subtitle={
+                activeFilter === 'All' 
+                  ? (language === 'bn' 
+                      ? 'ভিডিও এডিটিং, ৩ডি মোশন গ্রাফিক্স ও গ্রাফিক ডিজাইনের নির্বাচিত সকল কাজ' 
+                      : 'Curated collection of video editing, 3D motion, and graphic design projects')
+                  : (language === 'bn'
+                      ? `নির্বাচিত ক্যাটাগরির সকল কাজ (${displayProjects.length}টি)`
+                      : `Showing all projects in selected category (${displayProjects.length})`)
+              }
               alignment="center"
             />
           </motion.div>
-        </div>
-
-        {/* Top Featured Video Showcase: NASHRUS SIRAH REGISTRATION (Always fixed at top) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-10 sm:mb-14"
-        >
-          <div className="bg-white-surface/90 backdrop-blur-md rounded-3xl p-4 sm:p-6 lg:p-8 border border-border/80 shadow-md">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-              
-              {/* Left: Embedded Video Player (7 cols on lg for 16:9 widescreen video) */}
-              <div className="lg:col-span-7 flex justify-center w-full">
-                <div className="relative w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-border/90 bg-black">
-                  <iframe
-                    src="https://www.youtube.com/embed/A3FxMVUsldA?rel=0&modestbranding=1"
-                    title={language === 'bn' ? 'নশরুস সিরাহ রেজিস্ট্রেশন - অফিসিয়াল ভিডিও' : 'NASHRUS SIRAH REGISTRATION - Official Video'}
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-
-              {/* Right: Info, Hook & Action (5 cols on lg) */}
-              <div className="lg:col-span-5 flex flex-col items-start space-y-3.5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-accent/10 border border-primary-accent/25 text-primary-accent text-xs font-bold uppercase tracking-wider">
-                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  {language === 'bn' ? 'সর্বপ্রথম ভিডিও • অফিসিয়াল রিলিজ' : 'First Video • Official Release'}
-                </div>
-
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary-text leading-tight">
-                  {language === 'bn' 
-                    ? 'নশরুস সিরাহ রেজিস্ট্রেশন' 
-                    : 'NASHRUS SIRAH REGISTRATION'}
-                </h3>
-
-                <p className="text-sm font-semibold text-primary-accent">
-                  {language === 'bn' 
-                    ? 'অফিসিয়াল প্রমোশনাল ও রেজিস্ট্রেশন ভিডিও' 
-                    : 'Official Promotional & Registration Video'}
-                </p>
-
-                <p className="text-xs sm:text-sm text-secondary-text leading-relaxed">
-                  {language === 'bn'
-                    ? 'নশরুস সিরাহ-এর রেজিস্ট্রেশন সংক্রান্ত বিস্তারিত তথ্য ও গাইডলাইন সুন্দরভাবে তুলে ধরতে তৈরি প্রফেশনাল ভিডিও। মসৃণ এডিটিং, আকর্ষক টাইপোগ্রাফি ও তথ্যবহুল ভিজ্যুয়াল প্রেজেন্টেশন।'
-                    : 'Official registration promotional video for Nashrus Sirah, featuring clean video editing, dynamic typography, and clear visual information flow.'}
-                </p>
-
-                <div className="flex flex-wrap gap-2 pt-1">
-                  <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-secondary-text">
-                    Adobe Premiere Pro
-                  </span>
-                  <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-secondary-text">
-                    Motion Graphics
-                  </span>
-                  <span className="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-secondary-text">
-                    Typography & Sound
-                  </span>
-                </div>
-
-                <div className="pt-2 flex flex-wrap items-center gap-3">
-                  <a
-                    href="https://youtu.be/A3FxMVUsldA"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-sm transition-colors"
-                  >
-                    <Play size={13} fill="currentColor" />
-                    {language === 'bn' ? 'ইউটিউবে দেখুন' : 'Watch on YouTube'}
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Section Sub-heading for other works */}
-        <div id="portfolio-grid" className="flex flex-col items-center text-center mb-4">
-          <h3 className="text-lg sm:text-xl font-bold text-primary-text">
-            {language === 'bn' ? 'লেটেস্ট প্রজেক্ট ও কাজসমূহ' : 'Latest Projects & Works'}
-          </h3>
-          <p className="text-xs sm:text-sm text-secondary-text mt-0.5">
-            {activeFilter === 'All' 
-              ? (language === 'bn' 
-                  ? '২ লাইন ভিডিও (৬টি) ও ১ লাইন গ্রাফিক ডিজাইন (৩টি) • আরও ভিডিও দেখতে ক্যাটাগরিতে ক্লিক করুন' 
-                  : '2 rows of video (6) & 1 row of graphic design (3) • Click category for all works')
-              : (language === 'bn'
-                  ? `নির্বাচিত ক্যাটাগরির সকল কাজ প্রদর্শিত হচ্ছে (${displayProjects.length}টি)`
-                  : `Showing all projects in selected category (${displayProjects.length})`)}
-          </p>
         </div>
 
         {/* Category Filter */}
@@ -215,8 +130,8 @@ export function Portfolio() {
               whileTap={{ scale: 0.96 }}
               className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary-accent flex items-center gap-1.5 ${
                 activeFilter === filter.id
-                  ? 'bg-primary-accent text-white shadow-xs'
-                  : 'bg-white-surface/85 backdrop-blur-sm text-secondary-text border border-border/70 hover:text-primary-text hover:border-primary-accent/30'
+                  ? 'bg-primary-accent text-white shadow-md shadow-blue-900/25'
+                  : 'bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm text-secondary-text border border-blue-100/90 dark:border-gray-800 hover:text-primary-accent hover:border-blue-300 dark:hover:border-blue-700 hover:bg-blue-50/50'
               }`}
               aria-pressed={activeFilter === filter.id}
             >
@@ -224,7 +139,7 @@ export function Portfolio() {
               <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-semibold ${
                 activeFilter === filter.id
                   ? 'bg-white/20 text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-secondary-text'
+                  : 'bg-blue-50 dark:bg-gray-800 text-secondary-text'
               }`}>
                 {filter.count}
               </span>
@@ -249,11 +164,11 @@ export function Portfolio() {
                   exit={{ opacity: 0, scale: 0.9, y: 10 }}
                   transition={{ duration: 0.35, delay: index * 0.04, ease: "easeOut" }}
                   whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                  className="bg-white-surface/85 backdrop-blur-md rounded-2xl overflow-hidden border border-border/70 shadow-sm group hover:shadow-[0_20px_40px_-12px_rgba(30,58,138,0.18)] hover:border-primary-accent/50 transition-all duration-300 flex flex-col cursor-pointer block text-left"
+                  className="bg-white/95 dark:bg-[#111520]/95 backdrop-blur-md rounded-2xl overflow-hidden border border-blue-100/80 dark:border-blue-950/70 shadow-[0_4px_20px_-4px_rgba(30,58,138,0.08)] group hover:shadow-[0_20px_40px_-12px_rgba(30,58,138,0.22)] hover:border-blue-400/60 dark:hover:border-blue-600/50 transition-all duration-300 flex flex-col cursor-pointer block text-left"
                   aria-label={`${project.title[language]} (${project.platform})`}
                 >
                   {/* Thumbnail Area */}
-                  <div className="aspect-video w-full bg-gray-100 dark:bg-gray-800 relative overflow-hidden border-b border-border/50">
+                  <div className="aspect-video w-full bg-gray-100 dark:bg-gray-800 relative overflow-hidden border-b border-blue-100/50 dark:border-blue-950/50">
                     {project.thumbnail ? (
                       <img 
                         src={project.thumbnail} 
@@ -270,12 +185,12 @@ export function Portfolio() {
                     )}
 
                     {/* Category Tag overlay */}
-                    <div className="absolute top-2.5 left-2.5 bg-white-surface/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-primary-text shadow-xs border border-border/50">
+                    <div className="absolute top-2.5 left-2.5 bg-white/95 dark:bg-gray-900/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-primary-accent shadow-xs border border-blue-100/90 dark:border-blue-900/50">
                       {t.portfolio.filters[project.category === 'Video Editing' ? 'videoEditing' : project.category === 'Motion Graphics' ? 'motionGraphics' : 'graphicDesign']}
                     </div>
 
                     {/* Hover Play / Link Overlay indicator */}
-                    <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-blue-950/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                       <div className="w-12 h-12 rounded-full bg-primary-accent text-white flex items-center justify-center shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
                         {project.category === 'Video Editing' || project.platform === 'YouTube' ? (
                           <Play size={20} fill="white" className="ml-0.5" />

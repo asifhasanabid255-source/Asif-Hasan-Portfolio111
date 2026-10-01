@@ -102,7 +102,7 @@ export function AboutMe() {
   };
 
   return (
-    <section id="about" className="pt-12 pb-14 md:pt-18 md:pb-20 scroll-mt-20 lg:scroll-mt-24 bg-transparent overflow-hidden relative border-t border-border/40">
+    <section id="about" className="pt-14 sm:pt-18 pb-14 md:pb-20 scroll-mt-20 lg:scroll-mt-24 bg-transparent overflow-hidden relative border-t border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           

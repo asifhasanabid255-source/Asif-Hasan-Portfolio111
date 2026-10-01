@@ -3,8 +3,9 @@ import { SectionProvider } from './context/SectionContext';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { BackgroundCanvas } from './components/layout/BackgroundCanvas';
-import { Portfolio } from './components/sections/Portfolio';
+import { FeaturedShowcase } from './components/sections/FeaturedShowcase';
 import { AboutMe } from './components/sections/AboutMe';
+import { Portfolio } from './components/sections/Portfolio';
 import { SkillsAndTools } from './components/sections/SkillsAndTools';
 import { Services } from './components/sections/Services';
 import { Experience } from './components/sections/Experience';
@@ -20,8 +21,9 @@ export default function App() {
         <Navbar />
 
         <main className="w-full relative z-10 flex flex-col">
-          <Portfolio />
+          <FeaturedShowcase />
           <AboutMe />
+          <Portfolio />
           <SkillsAndTools />
           <Services />
           <Experience />

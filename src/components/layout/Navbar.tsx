@@ -23,16 +23,18 @@ export function Navbar() {
   }, []);
 
   const headerNavItems: Array<{ label: string; href: string; id: SectionId }> = [
-    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
+    { label: t.nav.home, href: '#home', id: 'home' },
     { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
     { label: t.nav.skills, href: '#skills', id: 'skills' },
     { label: t.nav.services, href: '#services', id: 'services' },
     { label: t.nav.cv, href: '#cv', id: 'cv' },
   ];
 
   const dropdownNavItems: Array<{ label: string; href: string; id: SectionId }> = [
-    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
+    { label: t.nav.home, href: '#home', id: 'home' },
     { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
     { label: t.nav.skills, href: '#skills', id: 'skills' },
     { label: t.nav.services, href: '#services', id: 'services' },
     { label: t.nav.experience, href: '#experience', id: 'experience' },
@@ -42,8 +44,9 @@ export function Navbar() {
   ];
 
   const allNavItems: Array<{ label: string; href: string; id: SectionId }> = [
-    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
+    { label: t.nav.home, href: '#home', id: 'home' },
     { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.portfolio, href: '#portfolio', id: 'portfolio' },
     { label: t.nav.skills, href: '#skills', id: 'skills' },
     { label: t.nav.services, href: '#services', id: 'services' },
     { label: t.nav.experience, href: '#experience', id: 'experience' },
